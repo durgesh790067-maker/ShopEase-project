@@ -49,8 +49,30 @@ ENDSQL
 DB_EXISTS=$(mysql --socket="$MYSQL_SOCKET" -u root -p"${MYSQL_ROOT_PASS}" -e "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME='quickcart';" 2>/dev/null | grep -c quickcart)
 if [ "$DB_EXISTS" -eq "0" ]; then
     echo "Importing database schema..."
-    mysql --socket="$MYSQL_SOCKET" -u root -p"${MYSQL_ROOT_PASS}" < /home/runner/workspace/QuickCart/quickcart.sql 2>&1
+    mysql --socket="$MYSQL_SOCKET" -u root -p"${MYSQL_ROOT_PASS}" < /home/runner/workspace/QuickCart/quickcart.sql 2>/dev/null
     echo "Database imported successfully."
+
+    echo "Applying customizations..."
+    mysql --socket="$MYSQL_SOCKET" -u root -p"${MYSQL_ROOT_PASS}" QuickCart 2>/dev/null <<CUSTOMSQL
+
+    -- Update all customer emails to @shopease.com
+    UPDATE customer SET email = REPLACE(email, '@quickcart.com', '@shopease.com');
+
+    -- Set all customer passwords to demo1234
+    UPDATE customer SET password = 'demo1234';
+
+    -- Top up wallets for first 5 customers to 5000
+    UPDATE wallet SET balance = 5000.00 WHERE customerID IN (1,2,3,4,5);
+
+    -- Remove original admins and keep only Durgesh and Roshni
+    DELETE FROM admin WHERE adminID BETWEEN 1 AND 4;
+    INSERT INTO admin (password) VALUES ('durgesh@089'), ('roshni@482');
+
+    -- Set all delivery agent passwords to demo1234
+    UPDATE deliveryagent SET password = 'demo1234';
+
+CUSTOMSQL
+    echo "Customizations applied."
 fi
 
 echo "Starting PHP server on port 5000..."
