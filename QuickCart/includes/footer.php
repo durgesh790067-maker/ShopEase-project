@@ -31,7 +31,7 @@
         <!-- Your content here -->
     </div>
     <div class="footer bg-info text-dark">
-        All rights reserved © 2023-2024, QuickCart.com
+        All rights reserved © 2026, Durgesh and Roshni BCA
     </div>
 </body>
 </html>
