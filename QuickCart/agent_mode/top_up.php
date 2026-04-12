@@ -71,7 +71,7 @@ if (isset ($_POST['edit_amount'])) {
 
         $current_date = date("d-m-Y");
 
-        $trans_statement = "$current_date^ You withdrew ₹$added_amount from your QuickCart Wallet Account^ $new_amount1^ $new_paid1^ $earning_total";
+        $trans_statement = "$current_date^ You withdrew ₹$added_amount from your ShopEase Wallet Account^ $new_amount1^ $new_paid1^ $earning_total";
         $new_Trans = $trans_history . "| " . $trans_statement;
 
         $update_query = "UPDATE delivery_agent_wallet SET earning_balance = '$new_amount' , earning_paid = '$new_paid', Transaction_history = '$new_Trans' WHERE agentID = '$agent_id';";

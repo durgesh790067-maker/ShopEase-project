@@ -24,7 +24,7 @@ if (isset ($_POST['insert_prod'])) {
         $select_result = mysqli_query($con, $select_query);
         $number = mysqli_num_rows($select_result);
         if ($number > 0) {
-            echo '<script>alert("This product is already present in Quickcart.")</script>';
+            echo '<script>alert("This product is already present in ShopEase.")</script>';
         } else {
             // insert product to table
             $insert_query = "INSERT INTO product (name, price, stock, brand, qty_bought, description, prod_image, categoryID) VALUES ('$prod_name','$prod_price','$prod_stock','$prod_brand',DEFAULT,'$prod_desc','$prod_image','$prod_category');";

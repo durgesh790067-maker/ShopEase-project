@@ -19,7 +19,7 @@
             bottom: 0;
             width: 100%;
             height: 50px; /* Adjust this value to the height of your footer */
-            background-color: #3498db; /* Adjust background color as needed */
+            background-color: #7c3aed; /* Adjust background color as needed */
             color: #fff; /* Adjust text color as needed */
             text-align: center;
             line-height: 50px; /* Center the text vertically */
@@ -30,7 +30,7 @@
     <div class="content">
         <!-- Your content here -->
     </div>
-    <div class="footer bg-info text-dark">
+    <div class="footer bg-shopease text-dark">
         All rights reserved © 2026, Durgesh and Roshni BCA
     </div>
 </body>

@@ -77,9 +77,9 @@ if (isset ($_GET['customer_id'])) {
     <!-- responsive navbar - container fluid is a bootstrap class which takes complete 100% width -->
     <div class="container-fluid p-0">
         <!-- first child -->
-        <nav class="navbar navbar-expand-lg bg-info">
+        <nav class="navbar navbar-expand-lg bg-shopease">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><i class="fa fa-shopping-basket" aria-hidden="true"> QuickCart</i></a>
+                <a class="navbar-brand" href="#"><i class="fa fa-shopping-basket" aria-hidden="true"> ShopEase</i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -119,18 +119,18 @@ if (isset ($_GET['customer_id'])) {
                 <div class="button text-center">
                     <button class="my-3 mx-2"><a
                             href="profile_page.php?customer_id=<?php echo "$cust_id"; ?>&view_profile"
-                            class="nav-link text-dark bg-info my-1 mx-1">View Profile</a></button>
+                            class="nav-link text-dark bg-shopease my-1 mx-1">View Profile</a></button>
                     <button class="my-3 mx-2"><a
                             href="profile_page.php?customer_id=<?php echo "$cust_id"; ?>&view_orders"
-                            class="nav-link text-dark bg-info my-1 mx-1">View Orders</a></button>
+                            class="nav-link text-dark bg-shopease my-1 mx-1">View Orders</a></button>
                     <button class="my-3 mx-2"><a href="profile_page.php?customer_id=<?php echo "$cust_id"; ?>&top_up"
-                            class="nav-link text-dark bg-info my-1 mx-1">Top Up Wallet</a></button>
+                            class="nav-link text-dark bg-shopease my-1 mx-1">Top Up Wallet</a></button>
                     <button class="my-3 mx-2"><a href="profile_page.php?customer_id=<?php echo "$cust_id"; ?>&rate_order"
-                            class="nav-link text-dark bg-info my-1 mx-1">Rate Order</a></button>
+                            class="nav-link text-dark bg-shopease my-1 mx-1">Rate Order</a></button>
                     <button class="my-3 mx-2"><a href="profile_page.php?customer_id=<?php echo "$cust_id"; ?>&rate_delivery"
-                            class="nav-link text-dark bg-info my-1 mx-1">Rate Delivery</a></button>
+                            class="nav-link text-dark bg-shopease my-1 mx-1">Rate Delivery</a></button>
                     <button class="my-3 mx-2"><a href="../start.php"
-                            class="nav-link text-dark bg-info my-1 mx-1">Logout</a></button>
+                            class="nav-link text-dark bg-shopease my-1 mx-1">Logout</a></button>
                 </div>
             </div>
         </div>

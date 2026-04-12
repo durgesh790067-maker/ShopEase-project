@@ -10,3 +10,27 @@
     object-fit: contain;
 }
 
+.bg-shopease {
+    background-color: #7c3aed !important;
+}
+
+.bg-shopease .navbar-brand,
+.bg-shopease .nav-link,
+.bg-shopease .navbar-brand i {
+    color: #ffffff !important;
+}
+
+.bg-shopease .nav-link:hover {
+    color: #e0d4fc !important;
+}
+
+.btn-shopease {
+    background-color: #7c3aed;
+    color: #fff;
+    border: none;
+}
+
+.btn-shopease:hover {
+    background-color: #5b21b6;
+    color: #fff;
+}

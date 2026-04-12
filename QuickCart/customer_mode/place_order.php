@@ -113,7 +113,7 @@ if (isset ($_GET['customer_id'])) {
     $result_delete_cart = mysqli_query($con, $delete_cart);
 
     // Redirect to view orders page
-    $alert_message = "Order has been placed successfully. Your order is being packed! Thank you for using QuickCart!";
+    $alert_message = "Order has been placed successfully. Your order is being packed! Thank you for using ShopEase!";
     // Redirect to home page
     echo "<script>alert('$alert_message'); window.location.href = 'profile_page.php?customer_id=$cust_id&view_orders';</script>";
     exit(); // Stop further execution

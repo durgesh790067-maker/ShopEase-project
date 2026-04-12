@@ -130,7 +130,7 @@ if (isset ($_POST['delivery_signup'])) {
         $upi_id = 'agent'. $new_cust . '@upi';
 
         $current_date = date("d-m-Y");
-        $trans = "$current_date^ You Created QuickCart Wallet Account!^ 0^ 0^ 0";
+        $trans = "$current_date^ You Created ShopEase Wallet Account!^ 0^ 0^ 0";
 
         $insert_wallet = "INSERT INTO delivery_agent_wallet (agentID, earning_balance, earning_paid, earning_total, Transaction_history, upiID) VALUES
         ('$new_cust', DEFAULT, DEFAULT, DEFAULT, '$trans', '$upi_id');";
