@@ -85,6 +85,6 @@ if (isset ($_POST['insert_prod'])) {
         <input type="file" name="product_image" id="product_image" class="form-control" required="required">
     </div>
     <div class="form-outline mb-4 w-50 m-auto">
-        <input type="submit" name="insert_prod" class="btn btn-info mb-3 px-3" value="Insert Products">
+        <input type="submit" name="insert_prod" class="btn btn-pastel mb-3 px-3" value="Insert Products">
     </div>
 </form>

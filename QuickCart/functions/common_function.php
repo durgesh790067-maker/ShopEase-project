@@ -428,7 +428,7 @@ function viewPendingOrders($admin_id)
                                 <form
                                     action='index.php?admin_id=<?php echo "$admin_id"; ?>&dispatch_order&order_id=<?php echo "$order_id"; ?>'
                                     method="post">
-                                    <button type="submit" class="btn btn-info my-1 px-3" name="ship_order">Dispatch Order</button>
+                                    <button type="submit" class="btn btn-pastel my-1 px-3" name="ship_order">Dispatch Order</button>
                                 </form>
                             </td>
                         </tr>
@@ -515,7 +515,7 @@ function viewDeliveringOrders($agent_id)
                                     <form
                                         action='index.php?agent_id=<?php echo "$agent_id"; ?>&deliver_order&order_id=<?php echo "$order_id"; ?>'
                                         method="post">
-                                        <button type="submit" class="btn btn-info my-1 px-3" name="ship_order">Deliver Order</button>
+                                        <button type="submit" class="btn btn-pastel my-1 px-3" name="ship_order">Deliver Order</button>
                                     </form>
                                 </td>
                             </tr>

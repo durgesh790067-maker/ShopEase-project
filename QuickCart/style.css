@@ -1,36 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.card-img-top{
+body {
+    background-color: #fdf6f0;
+    font-family: 'Lato', sans-serif;
+    color: #5a3e3e;
+}
+
+/* ── Navbar ── */
+.bg-pastel {
+    background: linear-gradient(90deg, #e8c4c4 0%, #f2d4d4 100%) !important;
+    border-bottom: 1px solid #d4a5a5;
+    box-shadow: 0 2px 8px rgba(180,120,120,0.12);
+}
+
+.bg-pastel .navbar-brand,
+.bg-pastel .nav-link,
+.bg-pastel .navbar-brand i {
+    color: #7d4a4a !important;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.bg-pastel .nav-link:hover {
+    color: #c97b7b !important;
+}
+
+.bg-pastel .navbar-toggler {
+    border-color: #c97b7b;
+}
+
+/* ── Buttons ── */
+.btn-pastel, .btn-info {
+    background: linear-gradient(135deg, #c97b7b, #d4a5a5) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 25px;
+    padding: 8px 28px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(180,120,120,0.25);
+}
+
+.btn-pastel:hover, .btn-info:hover {
+    background: linear-gradient(135deg, #b56868, #c97b7b) !important;
+    box-shadow: 0 5px 15px rgba(180,120,120,0.4);
+    transform: translateY(-1px);
+    color: #fff !important;
+}
+
+/* ── Cards ── */
+.card {
+    border: 1px solid #f0d5d5;
+    border-radius: 16px;
+    background: #fff8f5;
+    box-shadow: 0 4px 18px rgba(180,120,120,0.10);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 28px rgba(180,120,120,0.20);
+    transform: translateY(-3px);
+}
+
+.card-img-top {
     width: 100%;
     height: 200px;
     object-fit: contain;
+    border-radius: 16px 16px 0 0;
+    background: #fff;
+    padding: 10px;
 }
 
-.bg-shopease {
-    background-color: #7c3aed !important;
+/* ── Form Controls ── */
+.form-control, .form-select {
+    border: 1.5px solid #e8c4c4;
+    border-radius: 10px;
+    background: #fff8f5;
+    color: #5a3e3e;
+    padding: 10px 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.bg-shopease .navbar-brand,
-.bg-shopease .nav-link,
-.bg-shopease .navbar-brand i {
-    color: #ffffff !important;
+.form-control:focus, .form-select:focus {
+    border-color: #c97b7b;
+    box-shadow: 0 0 0 3px rgba(201,123,123,0.15);
+    background: #fff;
+    outline: none;
 }
 
-.bg-shopease .nav-link:hover {
-    color: #e0d4fc !important;
+.form-label {
+    color: #7d4a4a;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
 }
 
-.btn-shopease {
-    background-color: #7c3aed;
-    color: #fff;
+/* ── Section Headings ── */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #7d4a4a;
+}
+
+/* ── Login / Register Card ── */
+.auth-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(180,120,120,0.18);
+    padding: 40px;
+    border: 1px solid #f0d5d5;
+}
+
+.auth-card .auth-title {
+    font-family: 'Playfair Display', serif;
+    color: #7d4a4a;
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.auth-card .auth-subtitle {
+    color: #b58585;
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+}
+
+.auth-card .brand-icon {
+    font-size: 2.5rem;
+    color: #c97b7b;
+    margin-bottom: 10px;
+}
+
+/* ── Footer ── */
+.footer {
+    background: linear-gradient(90deg, #e8c4c4 0%, #f2d4d4 100%);
+    color: #7d4a4a !important;
+    border-top: 1px solid #d4a5a5;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.3px;
+}
+
+/* ── Table ── */
+table {
+    background: #fff8f5;
+}
+
+.table th {
+    background: #f2d4d4;
+    color: #7d4a4a;
+    font-family: 'Playfair Display', serif;
+    border-color: #e8c4c4;
+}
+
+.table td {
+    border-color: #f0e0e0;
+    color: #5a3e3e;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: #fff8f5;
+}
+
+/* ── Navbar button tiles (admin) ── */
+.nav-link.bg-pastel-tile {
+    background: #f9e8e8;
+    border: 1.5px solid #e8c4c4;
+    border-radius: 12px;
+    color: #7d4a4a !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.nav-link.bg-pastel-tile:hover {
+    background: #e8c4c4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(180,120,120,0.2);
+}
+
+/* ── Alerts ── */
+.alert {
+    border-radius: 12px;
     border: none;
 }
 
-.btn-shopease:hover {
-    background-color: #5b21b6;
-    color: #fff;
+/* ── Badge ── */
+.badge {
+    background-color: #c97b7b !important;
 }
+
+/* ── Dropdown ── */
+.dropdown-menu {
+    border: 1px solid #f0d5d5;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(180,120,120,0.15);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #fdf6f0; }
+::-webkit-scrollbar-thumb { background: #d4a5a5; border-radius: 4px; }

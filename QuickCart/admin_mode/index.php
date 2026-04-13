@@ -69,7 +69,7 @@ if (isset ($_GET['admin_id'])) {
     <!-- navbar -->
     <div class="container-fluid p-0">
         <!-- first child -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-shopease">
+        <nav class="navbar navbar-expand-lg navbar-light bg-pastel">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><i class="fa fa-shopping-basket" aria-hidden="true"> ShopEase</i></a>
                 <nav class="navbar navbar-expand-lg">
@@ -99,32 +99,32 @@ if (isset ($_GET['admin_id'])) {
             <div class="col-md-12 bg-secondary p-1 align-items-center">
                 <div class="button text-center">
                     <button class="my-3 mx-2"><a href="index.php?admin_id=<?php echo "$admin_id"; ?>&insert_product"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">Insert
+                            class="nav-link text-dark bg-pastel my-1 mx-1">Insert
                             Products</a></button>
                     <button class="my-3 mx-2"><a href="index.php?admin_id=<?php echo "$admin_id"; ?>&view_product"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">View
+                            class="nav-link text-dark bg-pastel my-1 mx-1">View
                             Products</a></button>
                     <button class="my-3 mx-2"><a href="index.php?admin_id=<?php echo "$admin_id"; ?>&insert_category"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">Insert
+                            class="nav-link text-dark bg-pastel my-1 mx-1">Insert
                             Categories</a></button>
                     <button class="my-3 mx-2"><a href="index.php?admin_id=<?php echo "$admin_id"; ?>&view_category"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">View
+                            class="nav-link text-dark bg-pastel my-1 mx-1">View
                             Categories</a></button>
                     <button class="my-3 mx-2"><a href="index.php?admin_id=<?php echo "$admin_id"; ?>&view_orders"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">All
+                            class="nav-link text-dark bg-pastel my-1 mx-1">All
                             Orders</a></button>
                     <button class="my-3 mx-2"><a href="index.php?admin_id=<?php echo "$admin_id"; ?>&list_customers"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">List
+                            class="nav-link text-dark bg-pastel my-1 mx-1">List
                             Customers</a></button>
                     <button class="my-3 mx-2"><a href="index.php?admin_id=<?php echo "$admin_id"; ?>&list_agents"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">List Delivery
+                            class="nav-link text-dark bg-pastel my-1 mx-1">List Delivery
                             Agents</a></button>
                     <button class="my-3 mx-2"><a href="index.php?admin_id=<?php echo "$admin_id"; ?>&order_review"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">View Order Reviews</a></button>
+                            class="nav-link text-dark bg-pastel my-1 mx-1">View Order Reviews</a></button>
                     <button class="my-3 mx-2"><a href="index.php?admin_id=<?php echo "$admin_id"; ?>&delivery_review"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">View Delivery Reviews</a></button>
+                            class="nav-link text-dark bg-pastel my-1 mx-1">View Delivery Reviews</a></button>
                     <button class="my-3 mx-2"><a href="../start.php"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">Logout</a></button>
+                            class="nav-link text-dark bg-pastel my-1 mx-1">Logout</a></button>
                 </div>
             </div>
         </div>

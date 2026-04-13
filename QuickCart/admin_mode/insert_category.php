@@ -27,7 +27,7 @@ if (isset ($_POST['insert_cat'])) {
             autocomplete="off" required="required">
     </div>
     <div class="input-group w-50 mb-2 m-auto">
-        <input type="submit" class="btn btn-info border-0 p-2 my-3" name="insert_cat" placeholder="Insert Category">
-        <!-- <button class="bg-shopease p-2 my-3 border-0">Insert Category</button> -->
+        <input type="submit" class="btn btn-pastel border-0 p-2 my-3" name="insert_cat" placeholder="Insert Category">
+        <!-- <button class="bg-pastel p-2 my-3 border-0">Insert Category</button> -->
     </div>
 </form>

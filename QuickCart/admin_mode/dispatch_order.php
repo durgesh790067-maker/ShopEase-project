@@ -57,7 +57,7 @@ if (isset ($_GET['dispatch_order']) and isset ($_GET['admin_id']) and isset ($_G
                 placeholder="Enter Amount (This will go directly to Delivery agent)" autocomplete="off" required="required" min="0" />
         </div>
         <div class="form-outline mb-4 w-50 m-auto">
-            <input type="submit" name="submit_dispatch" class="btn btn-info mb-3 px-3" value="Dispatch Order">
+            <input type="submit" name="submit_dispatch" class="btn btn-pastel mb-3 px-3" value="Dispatch Order">
         </div>
     </form>
 </div>

@@ -50,7 +50,7 @@ if (isset ($_GET['customer_id'])) {
     <!-- responsive navbar - container fluid is a bootstrap class which takes complete 100% width -->
     <div class="container-fluid p-0">
         <!-- first child -->
-        <nav class="navbar navbar-expand-lg bg-shopease">
+        <nav class="navbar navbar-expand-lg bg-pastel">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><i class="fa fa-shopping-basket" aria-hidden="true"> ShopEase</i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -207,7 +207,7 @@ if (isset ($_GET['customer_id'])) {
             <div class="col-md-2 bg-secondary p-0">
                 <!-- sidenav - categories to be listed -->
                 <ul class="navbar-nav me-auto text-center">
-                    <li class="nav-item bg-shopease">
+                    <li class="nav-item bg-pastel">
                         <a href="#" class="nav-link text-light">
                             <h4>Categories</h4>
                         </a>

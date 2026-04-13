@@ -86,7 +86,7 @@ if (isset ($_GET['edit_product']) and isset($_GET['admin_id'])) {
             </div>
         </div>
         <div class="form-outline mb-4 w-50 m-auto">
-            <input type="submit" name="edit_prod" class="btn btn-info mb-3 px-3" value="Update Product">
+            <input type="submit" name="edit_prod" class="btn btn-pastel mb-3 px-3" value="Update Product">
         </div>
     </form>
 </div>

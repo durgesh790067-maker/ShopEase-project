@@ -88,7 +88,7 @@ if ($num_of_rows == 0) {
                         </td>
                         <td colspan="2">
                             <form action='profile_page.php?customer_id=<?php echo "$cust_id"; ?>&give_oreview&order_id=<?php echo "$order_id";?>' method="post">
-                                <button type="submit" class="btn btn-info my-1 px-3" name="submit_review">Give Review</button>
+                                <button type="submit" class="btn btn-pastel my-1 px-3" name="submit_review">Give Review</button>
                             </form>
                         </td>
                     <?php }

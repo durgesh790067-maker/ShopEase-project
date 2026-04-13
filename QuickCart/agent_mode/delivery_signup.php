@@ -67,7 +67,7 @@ include ('../includes/connect.php');
                         <small class="text-muted">Format: YYYY-MM-DD</small>
                     </div>
                     <div class=" mt-4 pt-2">
-                        <input type="submit" value="Register" class="btn btn-info py-2 px-3 border-0" name="delivery_signup">
+                        <input type="submit" value="Register" class="btn btn-pastel py-2 px-3 border-0" name="delivery_signup">
                         <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="delivery_login.php"
                                 class="text-danger"> Login</a></p>
                     </div>

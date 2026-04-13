@@ -8,7 +8,7 @@
     <h5 class="w-50 m-auto my-4"> Gender: <?php echo "$gender"; ?></h5>
     <form action='profile_page.php?customer_id=<?php echo "$cust_id"; ?>&edit_profile' method="post">
         <div class="form-outline mb-4 w-50 m-auto">
-            <input type="submit" name="edit_profile" class="btn btn-info mb-3 px-3" value="Edit Profile">
+            <input type="submit" name="edit_profile" class="btn btn-pastel mb-3 px-3" value="Edit Profile">
         </div>
     </form>
 </div>

@@ -21,7 +21,7 @@ if (isset ($_GET['edit_category']) and isset($_GET['admin_id'])) {
                 class="form-control" placeholder="Enter Category Name" autocomplete="off" required="required">
         </div>
         <div class="form-outline mb-4 w-50 m-auto">
-            <input type="submit" name="edit_cat" class="btn btn-info mb-3 px-3" value="Update Category">
+            <input type="submit" name="edit_cat" class="btn btn-pastel mb-3 px-3" value="Update Category">
         </div>
     </form>
 </div>

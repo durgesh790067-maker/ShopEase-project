@@ -50,7 +50,7 @@ if (isset ($_GET['agent_id'])) {
     <div class="container-fluid p-0">
 
         <!-- first child -->
-        <nav class="navbar navbar-expand-lg bg-shopease">
+        <nav class="navbar navbar-expand-lg bg-pastel">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><i class="fa fa-shopping-basket" aria-hidden="true"> ShopEase</i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -62,7 +62,7 @@ if (isset ($_GET['agent_id'])) {
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <!-- <a href="index.php?agent_id=<?php echo "$agent_id"; ?>&agent_profile"
-                                class="nav-link text-dark bg-shopease my-1 mx-1">My Profile</a></button> -->
+                                class="nav-link text-dark bg-pastel my-1 mx-1">My Profile</a></button> -->
                             <a class="nav-link active" aria-current="page"
                                 href='profile_page.php?agent_id=<?php echo "$agent_id"; ?>'>My Profile</a>
                         </li>

@@ -1,4 +1,4 @@
--- QuickCart : An Online Retail Store --> Database schema with integrity constraints and data insertion
+-- ShopEase online cart : An Online Retail Store --> Database schema with integrity constraints and data insertion
 
 CREATE DATABASE IF NOT EXISTS QuickCart;
 USE QuickCart;

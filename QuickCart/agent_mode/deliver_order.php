@@ -57,7 +57,7 @@ if (isset ($_GET['deliver_order']) and isset ($_GET['agent_id']) and isset ($_GE
 
     <form action="" method="post">
         <div class="form-outline mb-4 w-50 m-auto">
-            <input type="submit" name="submit_deliver" class="btn btn-info mb-3 px-3" value="Deliver Order">
+            <input type="submit" name="submit_deliver" class="btn btn-pastel mb-3 px-3" value="Deliver Order">
         </div>
     </form>
 </div>

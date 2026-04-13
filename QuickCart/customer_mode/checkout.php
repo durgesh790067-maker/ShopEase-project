@@ -58,7 +58,7 @@ if (isset ($_GET['customer_id'])) {
     <!-- responsive navbar - container fluid is a bootstrap class which takes complete 100% width -->
     <div class="container-fluid p-0">
         <!-- first child -->
-        <nav class="navbar navbar-expand-lg bg-shopease">
+        <nav class="navbar navbar-expand-lg bg-pastel">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><i class="fa fa-shopping-basket" aria-hidden="true"> ShopEase</i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -162,7 +162,7 @@ if (isset ($_GET['customer_id'])) {
             </p>
 
             <form action="place_order.php?customer_id=<?php echo $cust_id; ?>" method="post">
-                <input type="submit" name="confirm_order" class="btn btn-info mb-3 px-3" value="Confirm and Place Order">
+                <input type="submit" name="confirm_order" class="btn btn-pastel mb-3 px-3" value="Confirm and Place Order">
                 <a href='index.php?customer_id=<?php echo "$cust_id"; ?>' class="btn btn-secondary mb-3 px-3 mx-2">Go Back</a>
             </form>
         </div>

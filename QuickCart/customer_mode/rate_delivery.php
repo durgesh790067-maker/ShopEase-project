@@ -128,7 +128,7 @@ if ($num_of_rows == 0) {
                             <form
                                 action='profile_page.php?customer_id=<?php echo "$cust_id"; ?>&give_dreview&order_id=<?php echo "$order_id"; ?>&agent_id=<?php echo"$order_agentID";?>'
                                 method="post">
-                                <button type="submit" class="btn btn-info my-1 px-3" name="submit_review">Give Review</button>
+                                <button type="submit" class="btn btn-pastel my-1 px-3" name="submit_review">Give Review</button>
                             </form>
                         </td>
                     <?php }

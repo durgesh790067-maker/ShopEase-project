@@ -32,7 +32,7 @@ if (isset($_GET['give_dreview']) and isset($_GET['customer_id']) and isset($_GET
                 required="required" min="0">
         </div>
         <div class="form-outline mb-4 w-50 m-auto">
-            <input type="submit" name="submit_review1" class="btn btn-info mb-3 px-3" value="Submit Review">
+            <input type="submit" name="submit_review1" class="btn btn-pastel mb-3 px-3" value="Submit Review">
         </div>
         <!-- made submit_review1, because same post on submit button on previous page, so this is set when come to this page. -->
     </form>

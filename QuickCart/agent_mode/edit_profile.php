@@ -61,7 +61,7 @@ if (isset ($_GET['edit_profile']) and isset($_GET['agent_id'])) {
             <small class="text-muted">Format: YYYY-MM-DD</small>
         </div>
         <div class="form-outline mb-4 w-50 m-auto">
-            <input type="submit" name="edit_prof" class="btn btn-info mb-3 px-3" value="Update Profile">
+            <input type="submit" name="edit_prof" class="btn btn-pastel mb-3 px-3" value="Update Profile">
         </div>
     </form>
 </div>

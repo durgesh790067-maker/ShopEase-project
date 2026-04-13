@@ -30,7 +30,7 @@
                         autocomplete="off" required="required" name="password" />
                     </div>
         <div class="form-outline mb-4 w-50 m-auto">
-            <input type="submit" name="edit_amount" class="btn btn-info mb-3 px-3" value="Withdraw">
+            <input type="submit" name="edit_amount" class="btn btn-pastel mb-3 px-3" value="Withdraw">
         </div>
     </form>
 </div>

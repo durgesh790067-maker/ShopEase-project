@@ -88,7 +88,7 @@ if (isset ($_GET['agent_id'])) {
     <!-- responsive navbar - container fluid is a bootstrap class which takes complete 100% width -->
     <div class="container-fluid p-0">
 
-        <nav class="navbar navbar-expand-lg bg-shopease">
+        <nav class="navbar navbar-expand-lg bg-pastel">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><i class="fa fa-shopping-basket" aria-hidden="true"> ShopEase</i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -129,19 +129,19 @@ if (isset ($_GET['agent_id'])) {
                 <div class="button text-center">
                     <button class="my-3 mx-2"><a
                             href="profile_page.php?agent_id=<?php echo "$agent_id"; ?>&view_profile"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">View Profile</a></button>
+                            class="nav-link text-dark bg-pastel my-1 mx-1">View Profile</a></button>
                     <button class="my-3 mx-2"><a
                             href="profile_page.php?agent_id=<?php echo "$agent_id"; ?>&wallet_history"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">Your Wallet History</a></button>
+                            class="nav-link text-dark bg-pastel my-1 mx-1">Your Wallet History</a></button>
                     <button class="my-3 mx-2"><a href="profile_page.php?agent_id=<?php echo "$agent_id"; ?>&top_up"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">Withdraw Money</a></button>
+                            class="nav-link text-dark bg-pastel my-1 mx-1">Withdraw Money</a></button>
                     <button class="my-3 mx-2"><a href="profile_page.php?agent_id=<?php echo "$agent_id"; ?>&history"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">Delivery History</a></button>
+                            class="nav-link text-dark bg-pastel my-1 mx-1">Delivery History</a></button>
                     <button class="my-3 mx-2"><a
                             href="profile_page.php?agent_id=<?php echo "$agent_id"; ?>&view_reviews"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">My Reviews</a></button>
+                            class="nav-link text-dark bg-pastel my-1 mx-1">My Reviews</a></button>
                     <button class="my-3 mx-2"><a href="../start.php"
-                            class="nav-link text-dark bg-shopease my-1 mx-1">Logout</a></button>
+                            class="nav-link text-dark bg-pastel my-1 mx-1">Logout</a></button>
                 </div>
             </div>
         </div>
