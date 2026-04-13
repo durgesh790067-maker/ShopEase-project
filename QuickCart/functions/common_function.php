@@ -1,167 +1,97 @@
 <?php
-include ('../includes/connect.php'); // Connect file to MySQL
+include ('../includes/connect.php');
+
+// ── shared card HTML helper ──────────────────────────────────────────────────
+function product_card_html($prod_id, $prod_name, $prod_desc, $prod_image, $prod_price, $cust_id) {
+    $short_desc = mb_strlen($prod_desc) > 72 ? mb_substr($prod_desc, 0, 72) . '…' : $prod_desc;
+    return "
+    <div class='col-6 col-md-4 col-lg-3 mb-4'>
+      <div class='prod-card h-100'>
+        <div class='prod-card__img-wrap'>
+          <img src='../images/$prod_image' alt='$prod_name'>
+        </div>
+        <div class='prod-card__body'>
+          <p class='prod-card__name'>$prod_name</p>
+          <p class='prod-card__desc'>$short_desc</p>
+          <div class='prod-card__footer'>
+            <span class='prod-card__price'>₹$prod_price</span>
+            <a href='index.php?add_to_cart=$prod_id&customer_id=$cust_id' class='prod-card__btn'>
+              <i class='fas fa-cart-plus'></i> Add
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>";
+}
 
 // display all products on home-page
-function display_products($cust_id)
-{
+function display_products($cust_id) {
     global $con;
-    if (!isset ($_GET['cat'])) {
-        $select_prod = "SELECT * FROM product;";
-        $result_prod = mysqli_query($con, $select_prod);
-        $num_of_rows = mysqli_num_rows($result_prod);
-        if ($num_of_rows == 0) {
-            echo "<h2 class = 'text-center text-danger'> No Products available in Store right now! Please visit again! </h2>";
+    if (!isset($_GET['cat'])) {
+        $result_prod = mysqli_query($con, "SELECT * FROM product;");
+        if (mysqli_num_rows($result_prod) == 0) {
+            echo "<p class='text-center text-muted py-5'>No products available right now.</p>";
         }
-        while ($row_prod = mysqli_fetch_assoc($result_prod)) {
-            $prod_id = $row_prod['productID'];
-            $prod_name = $row_prod['name'];
-            $prod_desc = $row_prod['description'];
-            $prod_image = $row_prod['prod_image'];
-            $prod_price = $row_prod['price'];
-
-            // // Truncate description to a fixed number of characters
-            // $truncated_desc = substr($prod_desc, 0, 100); // Adjust the number of characters as needed
-
-            echo "<div class='col-md-4 mb-2'>
-                            <div class='card h-100'> <!-- Set a fixed height for the card -->
-                                <img src='../images/$prod_image' class='card-img-top' alt='$prod_name image'>
-                                <div class='card-body d-flex flex-column'> <!-- Use flex column to align content -->
-                                    <h5 class='card-title'>$prod_name</h5>
-                                    <p class='card-text flex-grow-1'>$prod_desc</p> <!-- Truncated description -->
-                                    <div class='row justify-content-between align-items-center'> <!-- Align items horizontally -->
-                                        <div class='col'>
-                                            <p class='card-text'>Price: ₹$prod_price</p>
-                                        </div>
-                                        <div class='col-auto'>
-                                            <a href='index.php?add_to_cart=$prod_id&customer_id=$cust_id' class='btn btn-primary'>Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>";
+        while ($row = mysqli_fetch_assoc($result_prod)) {
+            echo product_card_html($row['productID'], $row['name'], $row['description'], $row['prod_image'], $row['price'], $cust_id);
         }
     }
 }
 
 // display unique category products only
-function display_cat_products($cust_id)
-{
+function display_cat_products($cust_id) {
     global $con;
-    if (isset ($_GET['cat'])) {
+    if (isset($_GET['cat'])) {
         $cat_id = $_GET['cat'];
-        $select_prod = "SELECT * FROM product where categoryID = $cat_id;";
-        $result_prod = mysqli_query($con, $select_prod);
-        $num_of_rows = mysqli_num_rows($result_prod);
-        if ($num_of_rows == 0) {
-            echo "<h2 class = 'text-center text-danger'> No Products available in this Category! </h2>";
+        $result_prod = mysqli_query($con, "SELECT * FROM product WHERE categoryID = $cat_id;");
+        if (mysqli_num_rows($result_prod) == 0) {
+            echo "<p class='text-center text-muted py-5'>No products in this category yet.</p>";
         }
-        while ($row_prod = mysqli_fetch_assoc($result_prod)) {
-            $prod_id = $row_prod['productID'];
-            $prod_name = $row_prod['name'];
-            $prod_desc = $row_prod['description'];
-            $prod_image = $row_prod['prod_image'];
-            $prod_price = $row_prod['price'];
-
-            // // Truncate description to a fixed number of characters
-            // $truncated_desc = substr($prod_desc, 0, 100); // Adjust the number of characters as needed
-
-            echo "<div class='col-md-4 mb-2'>
-                                <div class='card h-100'> <!-- Set a fixed height for the card -->
-                                    <img src='../images/$prod_image' class='card-img-top' alt='$prod_name image'>
-                                    <div class='card-body d-flex flex-column'> <!-- Use flex column to align content -->
-                                        <h5 class='card-title'>$prod_name</h5>
-                                        <p class='card-text flex-grow-1'>$prod_desc</p> <!-- Truncated description -->
-                                        <div class='row justify-content-between align-items-center'> <!-- Align items horizontally -->
-                                            <div class='col'>
-                                                <p class='card-text'>Price: ₹$prod_price</p>
-                                            </div>
-                                            <div class='col-auto'>
-                                                <a href='index.php?add_to_cart=$prod_id&customer_id=$cust_id' class='btn btn-primary'>Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>";
+        while ($row = mysqli_fetch_assoc($result_prod)) {
+            echo product_card_html($row['productID'], $row['name'], $row['description'], $row['prod_image'], $row['price'], $cust_id);
         }
     }
 }
 
 // display categories on side-nav
-function display_categories($cust_id)
-{
+function display_categories($cust_id) {
     global $con;
-    $select_cat = "SELECT * FROM productCategory;";
-    $cat_result = mysqli_query($con, $select_cat);
+    $cat_result = mysqli_query($con, "SELECT * FROM productCategory;");
     while ($row = mysqli_fetch_assoc($cat_result)) {
         $cat_name = $row["name"];
-        $cat_id = $row["categoryID"];
-        echo "<li class='nav-item'>
-                            <a href='index.php?customer_id=$cust_id&cat=$cat_id' class='nav-link text-light'>$cat_name</a>
-                        </li>";
+        $cat_id   = $row["categoryID"];
+        $active   = (isset($_GET['cat']) && $_GET['cat'] == $cat_id) ? 'cat-active' : '';
+        echo "<a href='index.php?customer_id=$cust_id&cat=$cat_id' class='cat-link $active'>$cat_name</a>";
     }
-
 }
 
 // displaying products searched
-function search_products($cust_id)
-{
+function search_products($cust_id) {
     global $con;
-    if (isset ($_GET['search_data'])) {
+    if (isset($_GET['search_data'])) {
         $searched_word = $_GET['search_bar'];
-        $select_prod = "SELECT * FROM product WHERE name LIKE '%$searched_word%' AND stock>0;";
-        $result_prod = mysqli_query($con, $select_prod);
-        $num_of_rows = mysqli_num_rows($result_prod);
-        if ($num_of_rows == 0) {
-            echo "<h2 class = 'text-center text-danger'> No results match! </h2>";
+        $result_prod = mysqli_query($con, "SELECT * FROM product WHERE name LIKE '%$searched_word%' AND stock>0;");
+        if (mysqli_num_rows($result_prod) == 0) {
+            echo "<p class='text-center text-muted py-5'>No results found for \"$searched_word\".</p>";
         }
-        while ($row_prod = mysqli_fetch_assoc($result_prod)) {
-            $prod_id = $row_prod['productID'];
-            $prod_name = $row_prod['name'];
-            $prod_desc = $row_prod['description'];
-            $prod_image = $row_prod['prod_image'];
-            $prod_price = $row_prod['price'];
-
-            // // Truncate description to a fixed number of characters
-            // $truncated_desc = substr($prod_desc, 0, 100); // Adjust the number of characters as needed
-
-            echo "<div class='col-md-4 mb-2'>
-                                <div class='card h-100'> <!-- Set a fixed height for the card -->
-                                    <img src='../images/$prod_image' class='card-img-top' alt='$prod_name image'>
-                                    <div class='card-body d-flex flex-column'> <!-- Use flex column to align content -->
-                                        <h5 class='card-title'>$prod_name</h5>
-                                        <p class='card-text flex-grow-1'>$prod_desc</p> <!-- Truncated description -->
-                                        <div class='row justify-content-between align-items-center'> <!-- Align items horizontally -->
-                                            <div class='col'>
-                                                <p class='card-text'>Price: ₹$prod_price</p>
-                                            </div>
-                                            <div class='col-auto'>
-                                                <a href='index.php?add_to_cart=$prod_id&customer_id=$cust_id' class='btn btn-primary'>Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>";
+        while ($row = mysqli_fetch_assoc($result_prod)) {
+            echo product_card_html($row['productID'], $row['name'], $row['description'], $row['prod_image'], $row['price'], $cust_id);
         }
     }
 }
 
 // function for adding products to cart
-function add_to_Cart($cust_id)
-{
-    if (isset ($_GET['add_to_cart'])) {
+function add_to_Cart($cust_id) {
+    if (isset($_GET['add_to_cart'])) {
         global $con;
         $prod_id = $_GET['add_to_cart'];
-        $user_id = $cust_id; // auto set customer id
-        $select_cart = "SELECT * FROM addstocart WHERE productID = '$prod_id' AND customerID = '$user_id'";
-        $result_query = mysqli_query($con, $select_cart);
-        $num_of_rows = mysqli_num_rows($result_query);
-        // echo "check if the function is called!";
-        if ($num_of_rows > 0) {
-            echo "<script> alert('Product already added to cart!') </script>";
-            echo "<script> window.open('index.php?customer_id=$cust_id', '_self') </script>";
+        $user_id = $cust_id;
+        $result_query = mysqli_query($con, "SELECT * FROM addstocart WHERE productID = '$prod_id' AND customerID = '$user_id'");
+        if (mysqli_num_rows($result_query) > 0) {
+            echo "<script>alert('Product already added to cart!')</script>";
+            echo "<script>window.open('index.php?customer_id=$cust_id', '_self')</script>";
         } else {
-            $insert_cart = "INSERT INTO addstocart (customerID, productID, quantity) VALUES ('$user_id', '$prod_id', 1)";
-            $result_cart = mysqli_query($con, $insert_cart);
+            $result_cart = mysqli_query($con, "INSERT INTO addstocart (customerID, productID, quantity) VALUES ('$user_id', '$prod_id', 1)");
             if ($result_cart) {
                 echo "<script>alert('Product added to cart successfully!')</script>";
                 echo "<script>window.open('index.php?customer_id=$cust_id', '_self')</script>";
@@ -170,152 +100,93 @@ function add_to_Cart($cust_id)
     }
 }
 
-// function1 to get cart item numbers
-function cart_item($cust_id)
-{
+function cart_item($cust_id) {
     global $con;
-    $user_id = $cust_id; // auto set customer id
-    $select_cart = "SELECT * FROM addstocart WHERE customerID = '$user_id'";
-    $result_cart = mysqli_query($con, $select_cart);
-    $count_items = mysqli_num_rows($result_cart);
-    echo $count_items;
-
+    $result_cart = mysqli_query($con, "SELECT * FROM addstocart WHERE customerID = '$cust_id'");
+    echo mysqli_num_rows($result_cart);
 }
 
-// function2 to get cart item numbers
-function cart_total_item($cust_id)
-{
+function cart_total_item($cust_id) {
     global $con;
-    $user_id = $cust_id; // auto set customer id
-    $select_cart = "SELECT * FROM addstocart WHERE customerID = '$user_id'";
-    $result_cart = mysqli_query($con, $select_cart);
-    $count_items = mysqli_num_rows($result_cart);
-    return $count_items;
-
+    $result_cart = mysqli_query($con, "SELECT * FROM addstocart WHERE customerID = '$cust_id'");
+    return mysqli_num_rows($result_cart);
 }
 
-//function to get total price in cart
-function total_cart($cust_id)
-{
+function total_cart($cust_id) {
     global $con;
-    $user_id = $cust_id; // auto set customer id
     $total = 0;
-    $select_cart = "SELECT * FROM addstocart WHERE customerID = '$user_id'";
-    $result_cart = mysqli_query($con, $select_cart);
+    $result_cart = mysqli_query($con, "SELECT * FROM addstocart WHERE customerID = '$cust_id'");
     while ($row_cart = mysqli_fetch_assoc($result_cart)) {
-        $prod_id = $row_cart['productID'];
-        $prod_qty = $row_cart['quantity'];
-        $select_prod = "SELECT * FROM product WHERE productID = '$prod_id'";
-        $result_prod = mysqli_query($con, $select_prod);
+        $result_prod = mysqli_query($con, "SELECT * FROM product WHERE productID = '{$row_cart['productID']}'");
         $row_prod = mysqli_fetch_assoc($result_prod);
-        $prod_price = $row_prod['price'];
-        $total += $prod_price * $prod_qty;
-
+        $total += $row_prod['price'] * $row_cart['quantity'];
     }
     return $total;
-
 }
 
-// function to remove products from cart
-function remove_cart($cust_id)
-{
-    if (isset ($_GET['remove_cart'])) {
+function remove_cart($cust_id) {
+    if (isset($_GET['remove_cart'])) {
         global $con;
         $prod_id = $_GET['remove_cart'];
-        $user_id = $cust_id; // auto set customer id
-        $delete_cart = "DELETE FROM addstocart WHERE productID = '$prod_id' AND customerID = '$user_id'";
-        $result_cart = mysqli_query($con, $delete_cart);
+        $result_cart = mysqli_query($con, "DELETE FROM addstocart WHERE productID = '$prod_id' AND customerID = '$cust_id'");
         if ($result_cart) {
             echo "<script>alert('Product removed from cart successfully!')</script>";
             echo "<script>window.open('index.php?customer_id=$cust_id', '_self')</script>";
         }
     }
-
 }
 
-// function to show the cart as dropdown
-function show_cart($cust_id)
-{
+function show_cart($cust_id) {
     global $con;
-    $user_id = $cust_id; // auto set customer id
-    $select_cart = "SELECT * FROM addstocart WHERE customerID = '$user_id'";
-    $result_cart = mysqli_query($con, $select_cart);
-    $num_of_rows = mysqli_num_rows($result_cart);
-    if ($num_of_rows == 0) {
-        echo "<h2 class='text-center text-danger'>No Products available in Cart!</h2>";
+    $result_cart = mysqli_query($con, "SELECT * FROM addstocart WHERE customerID = '$cust_id'");
+    if (mysqli_num_rows($result_cart) == 0) {
+        echo "<p class='text-center text-muted p-3'>Your cart is empty.</p>";
     }
     while ($row_cart = mysqli_fetch_assoc($result_cart)) {
-        $prod_id = $row_cart['productID'];
+        $prod_id  = $row_cart['productID'];
         $prod_qty = $row_cart['quantity'];
-        $select_prod = "SELECT * FROM product WHERE productID = '$prod_id'";
-        $result_prod = mysqli_query($con, $select_prod);
+        $result_prod = mysqli_query($con, "SELECT * FROM product WHERE productID = '$prod_id'");
         while ($row_prod = mysqli_fetch_assoc($result_prod)) {
-            $prod_name = $row_prod['name'];
+            $prod_name  = $row_prod['name'];
             $prod_image = $row_prod['prod_image'];
             $prod_price = $row_prod['price'];
-            $total_price = $prod_price * $prod_qty;
-            echo "<div class='card'>
-                <div class='card-body'>
-                    <div class='row align-items-center'>
-                        <div class='col-md-4'>
-                            <img src='../images/$prod_image' class='img-fluid' alt='$prod_name image'>
-                        </div>
-                        <div class='col-md-8'>
-                            <h6>$prod_name</h6>
-                            <p>Price: ₹$prod_price</p>
-                        </div>
-                    </div>
-                    <div class='row align-items-center mt-1'>
-                        <div class='col-md-6'>
-                            <input type='number' class='form-control text-center' value='$prod_qty'>
-                        </div>
-                        <div class='col-md-6'>
-                            <div class='row justify-content-center'>
-                                <div class='col-md-6'>
-                                    <a href='index.php?update_qnt=$prod_id&update_val=-1&customer_id=$cust_id' class='btn btn-dark btn-sm rounded-circle'>−</a>
-                                </div> 
-                                <div class='col-md-6'>
-                                    <a href='index.php?update_qnt=$prod_id&update_val=1&customer_id=$cust_id' class='btn btn-dark btn-sm rounded-circle'>+</a>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <a href='index.php?remove_cart=$prod_id&customer_id=$cust_id' class='btn btn-danger btn-sm mt-2'>Remove</a>
-                    </div>
+            echo "<div class='cart-item'>
+                <img src='../images/$prod_image' alt='$prod_name'>
+                <div class='cart-item-info'>
+                  <p class='cart-item-name'>$prod_name</p>
+                  <p class='cart-item-price'>₹$prod_price &times; $prod_qty</p>
+                  <div class='cart-item-actions'>
+                    <a href='index.php?update_qnt=$prod_id&update_val=-1&customer_id=$cust_id' class='qty-btn'>−</a>
+                    <span>$prod_qty</span>
+                    <a href='index.php?update_qnt=$prod_id&update_val=1&customer_id=$cust_id' class='qty-btn'>+</a>
+                    <a href='index.php?remove_cart=$prod_id&customer_id=$cust_id' class='remove-btn'>✕</a>
+                  </div>
                 </div>
-            </div>";
+              </div>";
         }
     }
 }
-function wallet($cust_id)
-{
+
+function wallet($cust_id) {
     global $con;
-    $user_id = $cust_id; // auto set customer id
-    $select_wallet = "SELECT * FROM wallet where customerID = '$user_id'";
-    $result_wallet = mysqli_query($con, $select_wallet);
+    $result_wallet = mysqli_query($con, "SELECT * FROM wallet WHERE customerID = '$cust_id'");
     $row_wallet = mysqli_fetch_assoc($result_wallet);
-    $wallet = $row_wallet['balance'];
-    return $wallet;
+    return $row_wallet['balance'];
 }
 
-function updateCart($cust_id)
-{
-    if (isset ($_GET['update_qnt'])) {
+function updateCart($cust_id) {
+    if (isset($_GET['update_qnt'])) {
         global $con;
-        $prod_id = $_GET['update_qnt'];
+        $prod_id    = $_GET['update_qnt'];
         $update_val = $_GET['update_val'];
-        $user_id = $cust_id; // auto set customer id
-        $select_cart = "SELECT * FROM addstocart WHERE productID = '$prod_id' AND customerID = '$user_id'";
-        $result_cart = mysqli_query($con, $select_cart);
-        $row_cart = mysqli_fetch_assoc($result_cart);
-        $prod_qty = $row_cart['quantity'];
-        $new_qty = $prod_qty + $update_val;
+        $result_cart = mysqli_query($con, "SELECT * FROM addstocart WHERE productID = '$prod_id' AND customerID = '$cust_id'");
+        $row_cart    = mysqli_fetch_assoc($result_cart);
+        $new_qty     = $row_cart['quantity'] + $update_val;
         if ($new_qty < 1) {
-            echo "<script>alert('Quantity cannot be less than 1! Click on Remove to remove the product from cart.')</script>";
+            echo "<script>alert('Quantity cannot be less than 1! Click Remove to delete.')</script>";
             echo "<script>window.open('index.php?customer_id=$cust_id', '_self')</script>";
         }
-        $update_cart = "UPDATE addstocart SET quantity = '$new_qty' WHERE productID = '$prod_id' AND customerID = '$user_id'";
-        $result_update = mysqli_query($con, $update_cart);
+        $result_update = mysqli_query($con, "UPDATE addstocart SET quantity = '$new_qty' WHERE productID = '$prod_id' AND customerID = '$cust_id'");
         if ($result_update) {
             echo "<script>alert('Cart updated successfully!')</script>";
             echo "<script>window.open('index.php?customer_id=$cust_id', '_self')</script>";
@@ -323,224 +194,154 @@ function updateCart($cust_id)
     }
 }
 
-// function to check if order within stock
-function check_stock($cust_id)
-{
+function check_stock($cust_id) {
     global $con;
-    // Query to fetch products added by the customer along with their quantities
-    $stock_query = "SELECT a.productID, a.quantity, p.name, p.stock FROM addsToCart a INNER JOIN product p ON a.productID = p.productID WHERE a.customerID = $cust_id;";
-    $stock_result = mysqli_query($con, $stock_query);
+    $stock_result = mysqli_query($con, "SELECT a.productID, a.quantity, p.name, p.stock FROM addsToCart a INNER JOIN product p ON a.productID = p.productID WHERE a.customerID = $cust_id;");
     if (mysqli_num_rows($stock_result) > 0) {
-        // Loop for each product
         while ($row = mysqli_fetch_assoc($stock_result)) {
-            if ($row['quantity'] > $row['stock']) {
-                // Quantity exceeds stock, return false
-                return $row['name'];
-            }
+            if ($row['quantity'] > $row['stock']) return $row['name'];
         }
     }
-    // All products have sufficient stock, return true
     return true;
 }
 
 // Function for admin to view pending orders & Dispatch them
-function viewPendingOrders($admin_id)
-{
+function viewPendingOrders($admin_id) {
     global $con;
-    $order_query = "SELECT * FROM `order` WHERE status = 'Confirmed' ORDER BY orderID DESC;";
-    $order_result = mysqli_query($con, $order_query);
+    $order_result = mysqli_query($con, "SELECT * FROM `order` WHERE status = 'Confirmed' ORDER BY orderID DESC;");
     if (mysqli_num_rows($order_result) == 0) {
-        echo "<h2 class='text-center text-success'> There are NO Pending Orders in the Store right now! </h2>";
+        echo "<div class='text-center py-5'><i class='fas fa-check-circle' style='font-size:2.5rem;color:#c97b7b;'></i><p class='mt-3' style='color:#b58585;'>No pending orders right now.</p></div>";
     } else {
         ?>
         <div class="container my-3">
-            <h2 class='text-center text-danger my-3'>Pending Orders</h2>
-            <table class='table table-bordered mt-4'>
-                <thead class='table-info text-center text-white'>
+            <h4 class='text-center mb-4' style='font-family:Playfair Display,serif;color:#7d4a4a;'>Pending Orders</h4>
+            <div class="table-responsive">
+            <table class='table table-bordered align-middle'>
+                <thead>
                     <tr>
-                        <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Order Cost</th>
-                        <th>Delivered to Address</th>
-                        <th>Order Placed on</th>
-                        <th>Delivery Agent Name</th>
-                        <th>Pack and Dispatch Order</th>
+                        <th>Order ID</th><th>Customer</th><th>Cost</th>
+                        <th>Address</th><th>Placed On</th><th>Agent</th><th>Action</th>
                     </tr>
                 </thead>
-                <tbody class='table-secondary text-white'>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($order_result)) {
-                        $order_id = $row['orderID'];
-                        $order_location = $row['location'];
-                        $order_price = $row['total_price'];
-                        $order_time = $row['time'];
-                        $order_custID = $row['customerID'];
-                        $order_agentID = $row['agentID'];
-                        $order_status = $row['status'];
-                        $order_agentPayment = $row['agentPayment'];
-                        ?>
-                        <tr class='text-center align-middle'>
-                            <td>
-                                <?php echo "$order_id"; ?>
-                            </td>
-                            <td>
-                                <?php
-                                $get_cust = "SELECT * FROM customer WHERE customerID = $order_custID;";
-                                $result_get = mysqli_query($con, $get_cust);
-                                $row_cust = mysqli_fetch_assoc($result_get);
-                                $cust_fname = $row_cust['first_name'];
-                                $cust_lname = $row_cust['last_name'];
-                                // Check if last_name is null
-                                if ($cust_lname === null) {
-                                    $cust_name = $cust_fname;
-                                } else {
-                                    $cust_name = $cust_fname . ' ' . $cust_lname;
-                                }
-                                echo "$cust_name";
-                                ?>
-                            </td>
-                            <td>
-                                <?php echo "₹$order_price"; ?>
-                            </td>
-                            <td>
-                                <?php echo "$order_location"; ?>
-                            </td>
-                            <td>
-                                <?php echo "$order_time"; ?>
-                            </td>
-                            <td>
-                                <?php
-                                $get_agent = "SELECT * FROM deliveryAgent WHERE agentID = $order_agentID;";
-                                $result_get = mysqli_query($con, $get_agent);
-                                $row_agent = mysqli_fetch_assoc($result_get);
-                                $agent_fname = $row_agent['first_name'];
-                                $agent_lname = $row_agent['last_name'];
-                                // Check if last_name is null
-                                if ($agent_lname === null) {
-                                    $agent_name = $agent_fname;
-                                } else {
-                                    $agent_name = $agent_fname . ' ' . $agent_lname;
-                                }
-                                echo "$agent_name";
-                                ?>
-                            </td>
-                            <td>
-                                <form
-                                    action='index.php?admin_id=<?php echo "$admin_id"; ?>&dispatch_order&order_id=<?php echo "$order_id"; ?>'
-                                    method="post">
-                                    <button type="submit" class="btn btn-pastel my-1 px-3" name="ship_order">Dispatch Order</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php
-                    }
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($order_result)) {
+                        $order_id = $row['orderID']; $order_location = $row['location'];
+                        $order_price = $row['total_price']; $order_time = $row['time'];
+                        $order_custID = $row['customerID']; $order_agentID = $row['agentID'];
+                        $rc = mysqli_query($con, "SELECT * FROM customer WHERE customerID = $order_custID;");
+                        $cust = mysqli_fetch_assoc($rc);
+                        $cust_name = trim($cust['first_name'] . ' ' . $cust['last_name']);
+                        $ra = mysqli_query($con, "SELECT * FROM deliveryAgent WHERE agentID = $order_agentID;");
+                        $agent = mysqli_fetch_assoc($ra);
+                        $agent_name = trim($agent['first_name'] . ' ' . $agent['last_name']);
                     ?>
+                    <tr>
+                        <td>#<?php echo $order_id; ?></td>
+                        <td><?php echo $cust_name; ?></td>
+                        <td>₹<?php echo $order_price; ?></td>
+                        <td><?php echo $order_location; ?></td>
+                        <td><?php echo $order_time; ?></td>
+                        <td><?php echo $agent_name; ?></td>
+                        <td>
+                            <form action='index.php?admin_id=<?php echo $admin_id; ?>&dispatch_order&order_id=<?php echo $order_id; ?>' method="post">
+                                <button type="submit" class="btn btn-pastel btn-sm" name="ship_order">Dispatch</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
+            </div>
         </div>
         <?php
     }
 }
 
 // Function for agent to view pending orders & deliver them
-function viewDeliveringOrders($agent_id)
-{
+function viewDeliveringOrders($agent_id) {
     global $con;
-    $order_query = "SELECT * FROM `order` WHERE status = 'Confirmed' AND agentID = '$agent_id' ORDER BY orderID DESC;";
-    $result_get = mysqli_query($con, $order_query);
-    if (mysqli_num_rows($result_get) != 0) {
-        echo "<h2 class='text-center text-danger'> You have been assigned an order to deliver! Kindly reach the store and wait there while the order is being packed. </h2>";
+    $result_confirmed = mysqli_query($con, "SELECT * FROM `order` WHERE status = 'Confirmed' AND agentID = '$agent_id' ORDER BY orderID DESC;");
+    if (mysqli_num_rows($result_confirmed) != 0) {
+        echo "<div class='text-center py-4'><i class='fas fa-store' style='font-size:2rem;color:#c97b7b;'></i><p class='mt-2' style='color:#7d4a4a;'>You have a confirmed order — please go to the store and wait while it is packed.</p></div>";
     } else {
-        $order_query = "SELECT * FROM `order` WHERE status = 'Packed and Shipped' AND agentID = '$agent_id' ORDER BY orderID DESC;";
-        $order_result = mysqli_query($con, $order_query);
+        $order_result = mysqli_query($con, "SELECT * FROM `order` WHERE status = 'Packed and Shipped' AND agentID = '$agent_id' ORDER BY orderID DESC;");
         if (mysqli_num_rows($order_result) == 0) {
-            echo "<h2 class='text-center text-success'> There are NO Orders that you have to deliver right now! </h2>";
+            echo "<div class='text-center py-5'><i class='fas fa-check-circle' style='font-size:2.5rem;color:#c97b7b;'></i><p class='mt-3' style='color:#b58585;'>No orders to deliver right now.</p></div>";
         } else {
             ?>
             <div class="container my-3">
-                <h2 class='text-center text-danger my-3'>Deliver Orders</h2>
-                <table class='table table-bordered mt-4'>
-                    <thead class='table-info text-center text-white'>
+                <h4 class='text-center mb-4' style='font-family:Playfair Display,serif;color:#7d4a4a;'>Orders to Deliver</h4>
+                <div class="table-responsive">
+                <table class='table table-bordered align-middle'>
+                    <thead>
                         <tr>
-                            <th>Order ID</th>
-                            <th>Customer Name</th>
-                            <th>Delivered to Address</th>
-                            <th>Order Placed on</th>
-                            <th>Your Earning</th>
-                            <th>Deliver Order</th>
+                            <th>Order ID</th><th>Customer</th><th>Address</th>
+                            <th>Placed On</th><th>Your Earning</th><th>Action</th>
                         </tr>
                     </thead>
-                    <tbody class='table-secondary text-white'>
-                        <?php
-                        while ($row = mysqli_fetch_assoc($order_result)) {
-                            $order_id = $row['orderID'];
-                            $order_location = $row['location'];
-                            $order_price = $row['total_price'];
-                            $order_time = $row['time'];
-                            $order_custID = $row['customerID'];
-                            $order_agentID = $row['agentID'];
-                            $order_status = $row['status'];
+                    <tbody>
+                        <?php while ($row = mysqli_fetch_assoc($order_result)) {
+                            $order_id = $row['orderID']; $order_location = $row['location'];
+                            $order_time = $row['time']; $order_custID = $row['customerID'];
                             $order_agentPayment = $row['agentPayment'];
-                            ?>
-                            <tr class='text-center align-middle'>
-                                <td>
-                                    <?php echo "$order_id"; ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    $get_cust = "SELECT * FROM customer WHERE customerID = $order_custID;";
-                                    $result_get = mysqli_query($con, $get_cust);
-                                    $row_cust = mysqli_fetch_assoc($result_get);
-                                    $cust_fname = $row_cust['first_name'];
-                                    $cust_lname = $row_cust['last_name'];
-                                    // Check if last_name is null
-                                    if ($cust_lname === null) {
-                                        $cust_name = $cust_fname;
-                                    } else {
-                                        $cust_name = $cust_fname . ' ' . $cust_lname;
-                                    }
-                                    echo "$cust_name";
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php echo "$order_location"; ?>
-                                </td>
-                                <td>
-                                    <?php echo "$order_time"; ?>
-                                </td>
-                                <td>
-                                    <?php echo "₹$order_agentPayment"; ?>
-                                </td>
-                                <td>
-                                    <form
-                                        action='index.php?agent_id=<?php echo "$agent_id"; ?>&deliver_order&order_id=<?php echo "$order_id"; ?>'
-                                        method="post">
-                                        <button type="submit" class="btn btn-pastel my-1 px-3" name="ship_order">Deliver Order</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php
-                        }
+                            $rc = mysqli_query($con, "SELECT * FROM customer WHERE customerID = $order_custID;");
+                            $cust = mysqli_fetch_assoc($rc);
+                            $cust_name = trim($cust['first_name'] . ' ' . $cust['last_name']);
                         ?>
+                        <tr>
+                            <td>#<?php echo $order_id; ?></td>
+                            <td><?php echo $cust_name; ?></td>
+                            <td><?php echo $order_location; ?></td>
+                            <td><?php echo $order_time; ?></td>
+                            <td>₹<?php echo $order_agentPayment; ?></td>
+                            <td>
+                                <a href='deliver_order.php?agent_id=<?php echo $agent_id; ?>&order_id=<?php echo $order_id; ?>' class='btn btn-pastel btn-sm'>Deliver</a>
+                            </td>
+                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
+                </div>
             </div>
             <?php
         }
     }
 }
 
-// Function to Display Current Status of the agent
-function displayStatus($agent_id)
-{
+// Function for agent to view history
+function viewDeliveryHistory($agent_id) {
     global $con;
-    $get_agent = "SELECT * FROM deliveryAgent WHERE agentID = $agent_id;";
-    $result_get = mysqli_query($con, $get_agent);
-    $row_agent = mysqli_fetch_assoc($result_get);
-    $current_status = $row_agent['availabilityStatus'];
-    ?>
-
-    <?php
+    $order_result = mysqli_query($con, "SELECT * FROM `order` WHERE status = 'Delivered' AND agentID = '$agent_id' ORDER BY orderID DESC;");
+    if (mysqli_num_rows($order_result) == 0) {
+        echo "<div class='text-center py-5'><i class='fas fa-history' style='font-size:2.5rem;color:#c97b7b;'></i><p class='mt-3' style='color:#b58585;'>No delivery history yet.</p></div>";
+    } else {
+        ?>
+        <div class="container my-3">
+            <h4 class='text-center mb-4' style='font-family:Playfair Display,serif;color:#7d4a4a;'>Delivery History</h4>
+            <div class="table-responsive">
+            <table class='table table-bordered align-middle'>
+                <thead>
+                    <tr><th>Order ID</th><th>Customer</th><th>Address</th><th>Placed On</th><th>Earning</th></tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($order_result)) {
+                        $rc = mysqli_query($con, "SELECT * FROM customer WHERE customerID = {$row['customerID']};");
+                        $cust = mysqli_fetch_assoc($rc);
+                        $cust_name = trim($cust['first_name'] . ' ' . $cust['last_name']);
+                    ?>
+                    <tr>
+                        <td>#<?php echo $row['orderID']; ?></td>
+                        <td><?php echo $cust_name; ?></td>
+                        <td><?php echo $row['location']; ?></td>
+                        <td><?php echo $row['time']; ?></td>
+                        <td>₹<?php echo $row['agentPayment']; ?></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <?php
+    }
 }
-
 ?>
