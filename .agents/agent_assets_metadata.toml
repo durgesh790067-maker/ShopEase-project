@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "f68xC6MxB_QxrZdPaESrR"
+uri = "file://QuickCart/images/paneer.png"
+type = "image"
+title = "paneer block"
+
+[[generated]]
+id = "foMou2gNBRdfrFnenZtFy"
+uri = "file://QuickCart/images/banana.png"
+type = "image"
+title = "banana bunch"
+
+[[generated]]
+id = "kSWkPJnIW14BCo9ok8H2s"
+uri = "file://QuickCart/images/lays-chips.png"
+type = "image"
+title = "chips bag"
+
+[[generated]]
+id = "h6Nv9cKEIhIlGvL7Dt3fg"
+uri = "file://QuickCart/images/kinder-joy.png"
+type = "image"
+title = "kinder joy egg"
+
+[[generated]]
+id = "tWfwTV8C82k5s3zUyO2cu"
+uri = "file://QuickCart/images/vitamin-c.png"
+type = "image"
+title = "vitamin c tablets"
+
+[[generated]]
+id = "vN5j8jNBpzjwaHLef7205"
+uri = "file://QuickCart/images/green-tea.png"
+type = "image"
+title = "green tea box"
+
+[[generated]]
+id = "cUj6h4727vIPISyvmffiW"
+uri = "file://QuickCart/images/turmeric.png"
+type = "image"
+title = "turmeric powder"
+
+[[generated]]
+id = "X5kBSim9-Y1WpsiBVFnIP"
+uri = "file://QuickCart/images/face-wash.png"
+type = "image"
+title = "face wash tube"
+
+[[generated]]
+id = "PyrWavbBrspYqsWp8mv7I"
+uri = "file://QuickCart/images/steel-bottle.png"
+type = "image"
+title = "steel bottle"
+
+[[generated]]
+id = "Lb3TyKpAJGrdGHSe2mU0v"
+uri = "file://QuickCart/images/atomic-habits.png"
+type = "image"
+title = "habits book"
