@@ -6,12 +6,12 @@ USE QuickCart;
 
 -- Customer table 
 CREATE TABLE IF NOT EXISTS customer (
-	customerID INT AUTO_INCREMENT PRIMARY KEY, 
+        customerID INT AUTO_INCREMENT PRIMARY KEY, 
     first_name VARCHAR(50) NOT NULL, -- name is a composite attribute having first_name & last_name
     last_name VARCHAR(50),
     address_street VARCHAR(100) NOT NULL, -- address is a composite attribute having street, city, state & pincode
-	address_city VARCHAR(50) NOT NULL,
-	address_state VARCHAR(50) NOT NULL,
+        address_city VARCHAR(50) NOT NULL,
+        address_state VARCHAR(50) NOT NULL,
     pincode INT NOT NULL,
     phone_no BIGINT UNIQUE NOT NULL, -- int not sufficient for 10 digits
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -28,20 +28,20 @@ SET age = DATEDIFF(CURDATE(), dob) / 365;
 
 -- Admin table
 CREATE TABLE IF NOT EXISTS admin (
-	adminID INT AUTO_INCREMENT PRIMARY KEY,
+        adminID INT AUTO_INCREMENT PRIMARY KEY,
     password VARCHAR(50) NOT NULL
 );
 
 -- Product Category table
 CREATE TABLE IF NOT EXISTS productCategory (
-	categoryID INT AUTO_INCREMENT PRIMARY KEY,
+        categoryID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     noOfProducts BIGINT NOT NULL DEFAULT 0
 );
 
 -- Product table
 CREATE TABLE IF NOT EXISTS product (
-	productID INT AUTO_INCREMENT PRIMARY KEY,
+        productID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL DEFAULT 0 CHECK (stock>=0),
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS product (
 
 -- Delivery Agent table
 CREATE TABLE IF NOT EXISTS deliveryAgent (
-	agentID INT AUTO_INCREMENT PRIMARY KEY,
+        agentID INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50),
     availabilityStatus VARCHAR(20) NOT NULL DEFAULT "Offline", -- 'Available', 'Busy', 'Offline'
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS deliveryAgent (
 
 -- Store table
 CREATE TABLE IF NOT EXISTS store (
-	storeID INT AUTO_INCREMENT PRIMARY KEY,
+        storeID INT AUTO_INCREMENT PRIMARY KEY,
     address_street VARCHAR(100) NOT NULL, -- address is a composite attribute having street, city, state & pincode
     address_city VARCHAR(50) NOT NULL,
     address_state VARCHAR(50) NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS store (
 
 -- Order table
 CREATE TABLE IF NOT EXISTS `order` (
-	orderID INT AUTO_INCREMENT PRIMARY KEY,
+        orderID INT AUTO_INCREMENT PRIMARY KEY,
     status VARCHAR(20) NOT NULL DEFAULT "Confirmed", -- 'Comfirmed', 'Packed and Shipped', 'Delivered'
     total_price DECIMAL(10, 2) NOT NULL,
     time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `order` (
 
 -- Wallet table
 CREATE TABLE IF NOT EXISTS wallet (
-	customerID INT NOT NULL,
+        customerID INT NOT NULL,
     balance DECIMAL(10, 2) NOT NULL DEFAULT 0 CHECK (balance>=0),
     upiID VARCHAR(100) NOT NULL,
     rewardPoints INT NOT NULL DEFAULT 0,
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS ProductReview (
 
 -- Delivery Review table
 CREATE TABLE IF NOT EXISTS DeliveryReview (
-	deliveryReviewID INT NOT NULL, 
+        deliveryReviewID INT NOT NULL, 
     orderID INT NOT NULL,
     agentID INT NOT NULL,
     comment TEXT,
@@ -271,7 +271,12 @@ INSERT INTO product (name, price, stock, brand, qty_bought, description, prod_im
 ('Body Lotion 400ml', 399.99, 60, 'Nivea', 40, 'Nourishes skin & provide long-lasting moisture.', "body-lotion.png", 8),
 ('Coconut Oil 250ml', 199.99, 30, 'Parachute', 12, 'Nothing but 100% pure coconut oil.', "coconut-oil.jpg", 8),
 ('Three Men In A Boat', 129.99, 120, 'Jerome K. Jerome', 22, 'Treat yourself with humour and adventure.', "three-men-in-a-boat.jpg", 10),
-('Uno Cards', 127.99, 60, 'Mattel', 22, "The world's most beloved card game.", "uno.png", 11);
+('Uno Cards', 127.99, 60, 'Mattel', 22, "The world's most beloved card game.", "uno.png", 11),
+('Banana 6pcs', 49.00, 50, 'QuickCart', 0, 'Fresh and ripe bananas, a great source of energy and potassium.', 'banana.png', 2),
+('Lays Classic Salted 52g', 20.00, 80, 'Lays', 0, 'Classic salted potato chips — light, crispy and irresistible.', 'lays-chips.png', 3),
+('Kinder Joy', 45.00, 60, 'Ferrero', 0, 'Delightful chocolate treat with a surprise toy inside for kids.', 'kinder-joy.png', 4),
+('Green Tea 25 Bags', 149.99, 40, 'Lipton', 0, 'Refreshing green tea packed with antioxidants for a healthy lifestyle.', 'green-tea.png', 5),
+('Atomic Habits', 399.00, 30, 'James Clear', 0, 'The life-changing bestseller on building good habits and breaking bad ones.', 'atomic-habits.png', 10);
 
 SELECT * FROM product;
 
