@@ -21,26 +21,177 @@ if (isset($_GET['customer_id'])) {
     <style>
         body { overflow-x: hidden; background: #EEECF1; }
 
-        /* ── welcome bar ── */
-        .welcome-bar {
-            background: #dce8f3;
-            border-bottom: 1px solid #ADC3D1;
-            padding: 6px 20px;
+        /* ── top bar ── */
+        .cust-topbar {
+            background: linear-gradient(90deg, #759CC9 0%, #8FB1CC 100%);
+            border-bottom: 1px solid #5a85b5;
+            padding: 12px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 0.88rem;
-            color: #3a4a5c;
+            box-shadow: 0 2px 8px rgba(90,133,181,0.18);
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        .welcome-bar a { color: #759CC9; font-weight: 600; text-decoration: none; }
-        .welcome-bar a:hover { color: #5a85b5; }
+        .cust-topbar .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+        .cust-topbar .brand i { margin-right: 6px; }
+        .cust-topbar .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .cust-topbar .welcome-text {
+            color: #EEECF1;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        /* cart button in topbar */
+        .cart-topbar-btn {
+            position: relative;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .cart-topbar-btn .cart-count {
+            position: absolute;
+            top: -7px;
+            right: -9px;
+            background: #3a4a5c;
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* wallet pill */
+        .wallet-pill {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ── page title ── */
+        .cust-page-title {
+            text-align: center;
+            padding: 16px 16px 6px;
+        }
+        .cust-page-title h4 {
+            font-family: 'Playfair Display', serif;
+            color: #3a4a5c;
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        .title-divider {
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #759CC9, #ADC3D1);
+            border-radius: 2px;
+            margin: 6px auto 0;
+        }
+
+        /* ── action nav (same as admin) ── */
+        .cust-action-nav {
+            background: #fff;
+            border-top: 1px solid #ADC3D1;
+            border-bottom: 1px solid #ADC3D1;
+            padding: 10px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+        }
+        .cust-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #3a4a5c;
+            background: #EEECF1;
+            border: 1.5px solid #ADC3D1;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .cust-nav-btn i { font-size: 0.78rem; color: #759CC9; }
+        .cust-nav-btn:hover {
+            background: #dce8f3;
+            border-color: #759CC9;
+            color: #759CC9;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(90,133,181,0.18);
+        }
+        .cust-nav-btn.logout-btn {
+            background: #f5f8fc;
+            border-color: #AEAEAE;
+            color: #949494;
+        }
+        .cust-nav-btn.logout-btn i { color: #AEAEAE; }
+        .cust-nav-btn.logout-btn:hover {
+            background: #EEECF1;
+            border-color: #759CC9;
+            color: #759CC9;
+        }
+        .cust-nav-btn.logout-btn:hover i { color: #759CC9; }
+
+        /* search inside nav */
+        .search-form {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .search-form input {
+            border: 1.5px solid #ADC3D1;
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 0.8rem;
+            outline: none;
+            background: #f5f8fc;
+            color: #3d4a56;
+            width: 160px;
+            transition: border-color 0.2s;
+        }
+        .search-form input:focus { border-color: #759CC9; }
+        .search-form button {
+            background: linear-gradient(135deg, #759CC9, #8FB1CC);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .search-form button:hover { background: linear-gradient(135deg, #5a85b5, #759CC9); }
 
         /* ── promo banner ── */
         .promo-banner {
             background: linear-gradient(90deg, #dce8f3, #EEECF1, #dce8f3);
             text-align: center;
-            padding: 10px;
-            font-size: 0.85rem;
+            padding: 8px;
+            font-size: 0.82rem;
             color: #759CC9;
             letter-spacing: 1px;
             border-bottom: 1px solid #ADC3D1;
@@ -176,7 +327,28 @@ if (isset($_GET['customer_id'])) {
             transform: translateY(-1px);
         }
 
-        /* ── cart items in dropdown ── */
+        /* ── cart dropdown ── */
+        .cart-dropdown-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .cart-dropdown-panel {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + 10px);
+            width: 310px;
+            background: #fff;
+            border: 1px solid #ADC3D1;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(90,133,181,0.15);
+            z-index: 9999;
+        }
+        .cart-dropdown-wrap:hover .cart-dropdown-panel,
+        .cart-dropdown-panel:hover { display: block; }
+        .cart-dropdown-header { padding: 12px; border-bottom: 1px solid #ADC3D1; text-align: center; }
+        .cart-dropdown-header h6 { font-family: 'Playfair Display', serif; color: #3a4a5c; margin: 0; font-size: 0.95rem; }
+        .cart-scroll { max-height: 45vh; overflow-y: auto; }
         .cart-item {
             display: flex;
             gap: 10px;
@@ -205,92 +377,96 @@ if (isset($_GET['customer_id'])) {
         .qty-btn:hover { background: #ADC3D1; color: #fff; }
         .remove-btn { color: #759CC9; font-size: 0.75rem; text-decoration: none; margin-left: 6px; }
         .remove-btn:hover { color: #5a85b5; }
-
-        /* ── checkout button ── */
-        .cart-dropdown-footer { padding: 10px; border-top: 1px solid #ADC3D1; display: flex; justify-content: space-between; align-items: center; }
-        .cart-dropdown-header { padding: 12px; border-bottom: 1px solid #ADC3D1; }
-        .cart-dropdown-header h6 { font-family: 'Playfair Display', serif; color: #3a4a5c; margin: 0; }
+        .cart-dropdown-footer {
+            padding: 10px;
+            border-top: 1px solid #ADC3D1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
         /* responsive */
         @media(max-width:768px) {
             .cat-sidebar { display: none; }
             .products-area { padding: 12px; }
+            .search-form input { width: 110px; }
+            .cust-topbar { padding: 10px 14px; }
         }
     </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-pastel">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><i class="fas fa-shopping-bag me-1"></i> ShopEase</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navTop">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navTop">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="profile_page.php?customer_id=<?php echo $cust_id; ?>">
-                        <i class="fas fa-user me-1"></i>My Profile
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?customer_id=<?php echo $cust_id; ?>">
-                        <i class="fas fa-store me-1"></i>Products
-                    </a>
-                </li>
-                <!-- Cart -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="cartDrop" role="button" data-bs-toggle="dropdown">
-                        <i class="fas fa-shopping-cart"></i>
-                        <sup><span class="badge rounded-pill" style="background:#759CC9;font-size:0.65rem;"><?php cart_item($cust_id); ?></span></sup>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end" style="width:320px;padding:0;" aria-labelledby="cartDrop">
-                        <div class="cart-dropdown-header text-center"><h6>My Cart</h6></div>
-                        <div style="max-height:45vh;overflow-y:auto;"><?php show_cart($cust_id); ?></div>
-                        <div class="cart-dropdown-footer">
-                            <?php
-                            $totalPrice = total_cart($cust_id);
-                            $walletBalance = wallet($cust_id);
-                            $valid_order = check_stock($cust_id);
-                            $total_items = cart_total_item($cust_id);
-                            $next_page = ($totalPrice <= $walletBalance) ? "checkout.php?customer_id=$cust_id" : "";
-                            ?>
-                            <strong style="color:#759CC9;">₹<?php echo $totalPrice; ?></strong>
-                            <a href="<?php echo $next_page; ?>" onclick="return confirmCheckout()" class="btn btn-pastel btn-sm">Checkout</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-wallet me-1"></i>₹<?php echo wallet($cust_id); ?>
-                    </a>
-                </li>
-            </ul>
-            <!-- Search -->
-            <form class="d-flex" role="search" action="search_bar.php" method="get">
-                <input type="hidden" name="customer_id" value="<?php echo $cust_id; ?>">
-                <input class="form-control me-2" type="search" placeholder="Search products…" name="search_bar" style="border-radius:20px;border-color:#ADC3D1;">
-                <button type="submit" class="btn btn-pastel btn-sm" name="search_data" style="white-space:nowrap;">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
+<?php
+add_to_Cart($cust_id);
+remove_cart($cust_id);
+updateCart($cust_id);
+$totalPrice    = total_cart($cust_id);
+$walletBalance = wallet($cust_id);
+$valid_order   = check_stock($cust_id);
+$total_items   = cart_total_item($cust_id);
+$next_page     = ($totalPrice <= $walletBalance) ? "checkout.php?customer_id=$cust_id" : "";
+?>
 
-<!-- Welcome bar -->
-<div class="welcome-bar">
-    <span><i class="fas fa-hand-wave me-1"></i> Welcome, <strong><?php echo $cust_name; ?></strong></span>
-    <a href="../start.php"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
+<!-- Top bar -->
+<div class="cust-topbar">
+    <a href="index.php?customer_id=<?php echo $cust_id; ?>" class="brand">
+        <i class="fas fa-shopping-bag"></i> ShopEase
+    </a>
+    <div class="topbar-right">
+        <span class="wallet-pill"><i class="fas fa-wallet"></i> ₹<?php echo $walletBalance; ?></span>
+
+        <!-- Cart hover dropdown -->
+        <div class="cart-dropdown-wrap">
+            <a href="#" class="cart-topbar-btn">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count"><?php cart_item($cust_id); ?></span>
+            </a>
+            <div class="cart-dropdown-panel">
+                <div class="cart-dropdown-header"><h6><i class="fas fa-shopping-cart me-1"></i>My Cart</h6></div>
+                <div class="cart-scroll"><?php show_cart($cust_id); ?></div>
+                <div class="cart-dropdown-footer">
+                    <strong style="color:#759CC9;">₹<?php echo $totalPrice; ?></strong>
+                    <a href="<?php echo $next_page; ?>" onclick="return confirmCheckout()" class="btn btn-pastel btn-sm">Checkout</a>
+                </div>
+            </div>
+        </div>
+
+        <span class="welcome-text"><i class="fas fa-user-circle me-1"></i>Welcome, <strong><?php echo $cust_name; ?></strong></span>
+    </div>
 </div>
 
 <!-- Promo banner -->
 <div class="promo-banner">✨ Free delivery on orders above ₹500 &nbsp;|&nbsp; Holi Special Savings with ShopEase! ✨</div>
 
-<?php
-add_to_Cart($cust_id);
-remove_cart($cust_id);
-updateCart($cust_id);
-?>
+<!-- Action Nav -->
+<div class="cust-action-nav">
+    <a href="profile_page.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+        <i class="fas fa-user"></i> View Profile
+    </a>
+    <a href="view_orders.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+        <i class="fas fa-receipt"></i> View Orders
+    </a>
+    <a href="top_up.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+        <i class="fas fa-wallet"></i> Top Up Wallet
+    </a>
+    <a href="rate_order.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+        <i class="fas fa-star"></i> Rate Order
+    </a>
+    <a href="rate_delivery.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+        <i class="fas fa-truck"></i> Rate Delivery
+    </a>
+
+    <!-- Search -->
+    <form class="search-form" action="search_bar.php" method="get">
+        <input type="hidden" name="customer_id" value="<?php echo $cust_id; ?>">
+        <input type="search" placeholder="Search products…" name="search_bar">
+        <button type="submit" name="search_data"><i class="fas fa-search"></i></button>
+    </form>
+
+    <a href="../start.php" class="cust-nav-btn logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+</div>
 
 <!-- Main shop layout -->
 <div class="shop-layout">
@@ -307,6 +483,7 @@ updateCart($cust_id);
             <?php
             display_products($cust_id);
             display_cat_products($cust_id);
+            search_products($cust_id);
             ?>
         </div>
     </main>
@@ -319,7 +496,7 @@ updateCart($cust_id);
 <script>
 function confirmCheckout() {
     if ("<?php echo $next_page; ?>" === "") {
-        alert("Insufficient wallet balance. Please top up in 'My Profile'.");
+        alert("Insufficient wallet balance. Please top up in 'Top Up Wallet'.");
         return false;
     }
     if ("<?php echo $valid_order; ?>" != "1" && "<?php echo $valid_order; ?>" !== true) {
