@@ -1,4 +1,13 @@
 <?php
+if (!isset($con)) { include_once('../includes/connect.php'); }
+if (!isset($cust_id)) {
+    if (isset($_GET['customer_id'])) {
+        $cust_id = intval($_GET['customer_id']);
+    } else {
+        header('Location: customer_login.php');
+        exit;
+    }
+}
 $fetch_orders = "SELECT * FROM `order` WHERE customerID = $cust_id ORDER BY orderID DESC;";
 $result_fetch = mysqli_query($con, $fetch_orders);
 $num_of_rows = mysqli_num_rows($result_fetch);

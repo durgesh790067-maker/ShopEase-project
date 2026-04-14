@@ -1,4 +1,13 @@
 <?php
+if (!isset($con)) { include_once('../includes/connect.php'); }
+if (!isset($cust_id)) {
+    if (isset($_GET['customer_id'])) {
+        $cust_id = intval($_GET['customer_id']);
+    } else {
+        header('Location: customer_login.php');
+        exit;
+    }
+}
     $get_data = "SELECT * FROM wallet WHERE customerID = $cust_id;";
     $result_get = mysqli_query($con, $get_data);
     $row_data = mysqli_fetch_assoc($result_get);
