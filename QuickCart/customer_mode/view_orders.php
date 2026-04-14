@@ -1,4 +1,12 @@
 <?php
+if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
+    if (isset($_GET['customer_id'])) {
+        header("Location: profile_page.php?customer_id=" . intval($_GET['customer_id']) . "&view_orders");
+    } else {
+        header("Location: customer_login.php");
+    }
+    exit;
+}
 if (!isset($con)) { include_once('../includes/connect.php'); }
 if (!isset($cust_id)) {
     if (isset($_GET['customer_id'])) {
@@ -7,6 +15,11 @@ if (!isset($cust_id)) {
         header('Location: customer_login.php');
         exit;
     }
+}
+if (!isset($cust_name)) {
+    $r = mysqli_query($con, "SELECT first_name, last_name FROM customer WHERE customerID = $cust_id");
+    $row = mysqli_fetch_assoc($r);
+    $cust_name = trim(($row['first_name'] ?? '') . ' ' . ($row['last_name'] ?? ''));
 }
 $fetch_orders = "SELECT * FROM `order` WHERE customerID = $cust_id ORDER BY orderID DESC;";
 $result_fetch = mysqli_query($con, $fetch_orders);
@@ -61,7 +74,6 @@ if ($num_of_rows == 0) {
                         $row_cust = mysqli_fetch_assoc($result_get);
                         $cust_fname = $row_cust['first_name'];
                         $cust_lname = $row_cust['last_name'];
-                        // Check if last_name is null
                         if ($cust_lname === null) {
                             $cust_name = $cust_fname;
                         } else {
@@ -86,7 +98,6 @@ if ($num_of_rows == 0) {
                         $row_agent = mysqli_fetch_assoc($result_get);
                         $agent_fname = $row_agent['first_name'];
                         $agent_lname = $row_agent['last_name'];
-                        // Check if last_name is null
                         if ($agent_lname === null) {
                             $agent_name = $agent_fname;
                         } else {

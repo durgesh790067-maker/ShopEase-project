@@ -1,4 +1,12 @@
 <?php
+if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
+    if (isset($_GET['customer_id'])) {
+        header("Location: profile_page.php?customer_id=" . intval($_GET['customer_id']) . "&rate_order");
+    } else {
+        header("Location: customer_login.php");
+    }
+    exit;
+}
 if (!isset($con)) { include_once('../includes/connect.php'); }
 if (!isset($cust_id)) {
     if (isset($_GET['customer_id'])) {
@@ -7,6 +15,11 @@ if (!isset($cust_id)) {
         header('Location: customer_login.php');
         exit;
     }
+}
+if (!isset($cust_name)) {
+    $r = mysqli_query($con, "SELECT first_name, last_name FROM customer WHERE customerID = $cust_id");
+    $row = mysqli_fetch_assoc($r);
+    $cust_name = trim(($row['first_name'] ?? '') . ' ' . ($row['last_name'] ?? ''));
 }
 $fetch_orders = "SELECT * FROM `order` WHERE customerID = $cust_id AND status = 'Delivered' ORDER BY orderID DESC;";
 $result_fetch = mysqli_query($con, $fetch_orders);
@@ -42,7 +55,6 @@ if ($num_of_rows == 0) {
                 $order_agentID = $fetch_row["agentID"];
                 $number++;
 
-                // Search if order review exists for this orderID in ProductReview table
                 $isReview = "Yes";
                 $search_review = "SELECT * FROM ProductReview WHERE orderID = '$order_id' AND customerID = '$cust_id';";
                 $result_review = mysqli_query($con, $search_review);
@@ -72,15 +84,13 @@ if ($num_of_rows == 0) {
                         <td>
                             <?php
                             $stars = '';
-                            $filledStars = intval($rating); // Number of filled stars
-                            $emptyStars = 5 - $filledStars; // Number of empty stars
-                            // Add filled stars
+                            $filledStars = intval($rating);
+                            $emptyStars = 5 - $filledStars;
                             for ($i = 0; $i < $filledStars; $i++) {
-                                $stars .= '★'; // Filled star
+                                $stars .= '★';
                             }
-                            // Add empty stars
                             for ($i = 0; $i < $emptyStars; $i++) {
-                                $stars .= '☆'; // Empty star
+                                $stars .= '☆';
                             }
                             echo "$stars";
                             ?>

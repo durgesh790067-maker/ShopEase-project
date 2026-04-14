@@ -1,4 +1,12 @@
 <?php
+if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
+    if (isset($_GET['customer_id'])) {
+        header("Location: profile_page.php?customer_id=" . intval($_GET['customer_id']) . "&top_up");
+    } else {
+        header("Location: customer_login.php");
+    }
+    exit;
+}
 if (!isset($con)) { include_once('../includes/connect.php'); }
 if (!isset($cust_id)) {
     if (isset($_GET['customer_id'])) {
@@ -7,6 +15,11 @@ if (!isset($cust_id)) {
         header('Location: customer_login.php');
         exit;
     }
+}
+if (!isset($cust_name)) {
+    $r = mysqli_query($con, "SELECT first_name, last_name FROM customer WHERE customerID = $cust_id");
+    $row = mysqli_fetch_assoc($r);
+    $cust_name = trim(($row['first_name'] ?? '') . ' ' . ($row['last_name'] ?? ''));
 }
     $get_data = "SELECT * FROM wallet WHERE customerID = $cust_id;";
     $result_get = mysqli_query($con, $get_data);
@@ -43,7 +56,6 @@ if (isset ($_POST['edit_amount'])) {
     $added_amount = $_POST['amount'];
     $password = $_POST['password'];
 
-    // checking all filled - empty condition
     if ($added_amount == '') {
         echo "<script> alert('Please fill all the available fields.')</script>";
         exit();
@@ -51,8 +63,6 @@ if (isset ($_POST['edit_amount'])) {
         echo "<script> alert('Incorrect Password. Please try again.')</script>";
     }
     else {
-
-        // update wallet's new details to table - SET safe mode OFF to update
         $safe_mode_query = "SET SQL_SAFE_UPDATES = 0;";
         $result_safe = mysqli_query($con, $safe_mode_query);
         if ($result_safe==0){
