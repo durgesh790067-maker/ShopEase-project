@@ -10,7 +10,7 @@
     <style>
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #EEECF1 0%, #dce8f3 50%, #EEECF1 100%);
+            background: #F7F2EB;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -18,77 +18,48 @@
             text-align: center;
             padding: 20px;
         }
-        .brand-logo {
-            font-size: 3.5rem;
-            color: #759CC9;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 4px 8px rgba(117,156,201,0.35));
-        }
+        .brand-logo { font-size: 3.5rem; color: #1A1A1A; margin-bottom: 10px; }
         .brand-name {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: #3a4a5c;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
+            font-size: 3rem; font-weight: 700;
+            color: #1A1A1A; letter-spacing: 1px; margin-bottom: 6px;
         }
         .brand-tagline {
-            font-size: 1rem;
-            color: #949494;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 50px;
+            font-size: 1rem; color: #888;
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 50px;
         }
         .role-card {
-            background: #fff;
-            border: 1.5px solid #ADC3D1;
+            background: #FFFFFF;
+            border: 2px solid #FFE6CD;
             border-radius: 20px;
             padding: 30px 25px;
-            width: 160px;
-            margin: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
+            width: 160px; margin: 10px;
+            cursor: pointer; text-decoration: none;
+            display: inline-flex; flex-direction: column;
+            align-items: center; gap: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 18px rgba(90,133,181,0.10);
+            box-shadow: 0 4px 18px rgba(0,0,0,0.07);
         }
         .role-card:hover {
-            background: linear-gradient(135deg, #dce8f3, #EEECF1);
+            background: #FFE6CD;
             transform: translateY(-6px);
-            box-shadow: 0 10px 30px rgba(90,133,181,0.25);
-            border-color: #759CC9;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #1A1A1A;
         }
-        .role-icon {
-            font-size: 2.2rem;
-            color: #759CC9;
-        }
+        .role-icon { font-size: 2.2rem; color: #1A1A1A; }
         .role-label {
             font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #3a4a5c;
+            font-size: 1rem; font-weight: 600; color: #1A1A1A;
         }
-        .roles-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+        .roles-wrapper { display: flex; flex-wrap: wrap; justify-content: center; }
         .divider {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #759CC9, #ADC3D1);
-            border-radius: 2px;
-            margin: 0 auto 20px;
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, #1A1A1A, #FFE6CD);
+            border-radius: 2px; margin: 0 auto 20px;
         }
         .select-text {
-            font-size: 0.85rem;
-            color: #949494;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
+            font-size: 0.85rem; color: #888;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px;
         }
     </style>
 </head>
@@ -111,6 +82,6 @@
             <span class="role-label">Delivery Agent</span>
         </a>
     </div>
-    <p style="margin-top:50px; font-size:0.78rem; color:#AEAEAE;">© 2026, Durgesh and Roshni BCA</p>
+    <p style="margin-top:50px; font-size:0.78rem; color:#aaa;">© 2026, Durgesh and Roshni BCA</p>
 </body>
 </html>

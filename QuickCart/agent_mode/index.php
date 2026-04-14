@@ -31,17 +31,17 @@ if (isset ($_GET['agent_id'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../style.css">
     <style>
-        body { overflow-x: hidden; background: #EEECF1; }
+        body { overflow-x: hidden; background: #F7F2EB; }
 
         /* ── top navbar ── */
         .agent-topbar {
-            background: linear-gradient(90deg, #759CC9 0%, #8FB1CC 100%);
-            border-bottom: 1px solid #5a85b5;
+            background: #1A1A1A;
+            border-bottom: 2px solid #FFE6CD;
             padding: 12px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(90,133,181,0.18);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.18);
         }
         .agent-topbar .brand {
             font-family: 'Playfair Display', serif;
@@ -62,13 +62,13 @@ if (isset ($_GET['agent_id'])) {
             text-decoration: none;
             font-weight: 600;
         }
-        .agent-topbar a:hover { color: #EEECF1; }
-        .agent-topbar .welcome-text { color: #EEECF1; }
+        .agent-topbar a:hover { color: #FFE6CD; }
+        .agent-topbar .welcome-text { color: #FFE6CD; }
 
         /* ── status bar ── */
         .agent-status-bar {
             background: #fff;
-            border-bottom: 1px solid #ADC3D1;
+            border-bottom: 1px solid #FFE6CD;
             padding: 10px 24px;
             display: flex;
             align-items: center;
@@ -85,9 +85,9 @@ if (isset ($_GET['agent_id'])) {
             font-size: 0.82rem;
             font-weight: 600;
         }
-        .status-available { background: #dce8f3; color: #3a6a9c; border: 1px solid #ADC3D1; }
-        .status-offline   { background: #EEECF1; color: #949494; border: 1px solid #AEAEAE; }
-        .status-busy      { background: #f5f8fc; color: #759CC9; border: 1px solid #8FB1CC; }
+        .status-available { background: #FFE6CD; color: #1A1A1A; border: 1px solid #FFE6CD; }
+        .status-offline   { background: #F7F2EB; color: #888; border: 1px solid #AEAEAE; }
+        .status-busy      { background: #FFFFFF; color: #1A1A1A; border: 1px solid #FFE6CD; }
 
         .agent-action-nav {
             display: flex;
@@ -103,38 +103,38 @@ if (isset ($_GET['agent_id'])) {
             border-radius: 20px;
             font-size: 0.81rem;
             font-weight: 600;
-            color: #3a4a5c;
-            background: #EEECF1;
-            border: 1.5px solid #ADC3D1;
+            color: #1A1A1A;
+            background: #F7F2EB;
+            border: 1.5px solid #FFE6CD;
             text-decoration: none;
             transition: all 0.2s;
             white-space: nowrap;
         }
-        .agent-nav-btn i { color: #759CC9; font-size: 0.78rem; }
+        .agent-nav-btn i { color: #1A1A1A; font-size: 0.78rem; }
         .agent-nav-btn:hover {
-            background: #dce8f3;
-            border-color: #759CC9;
-            color: #759CC9;
+            background: #FFE6CD;
+            border-color: #1A1A1A;
+            color: #1A1A1A;
             transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(90,133,181,0.15);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.10);
         }
         .agent-nav-btn.logout-btn {
-            background: #f5f8fc;
-            border-color: #AEAEAE;
-            color: #949494;
+            background: #FFFFFF;
+            border-color: #e0d8d0;
+            color: #888;
         }
-        .agent-nav-btn.logout-btn i { color: #AEAEAE; }
+        .agent-nav-btn.logout-btn i { color: #aaa; }
         .agent-nav-btn.logout-btn:hover {
-            background: #EEECF1;
-            border-color: #759CC9;
-            color: #759CC9;
+            background: #F7F2EB;
+            border-color: #1A1A1A;
+            color: #1A1A1A;
         }
-        .agent-nav-btn.logout-btn:hover i { color: #759CC9; }
+        .agent-nav-btn.logout-btn:hover i { color: #1A1A1A; }
 
         /* dropdown menu */
         .dropdown-item.active, .dropdown-item:active {
-            background-color: #dce8f3;
-            color: #759CC9;
+            background-color: #FFE6CD;
+            color: #1A1A1A;
         }
     </style>
 </head>
@@ -156,7 +156,7 @@ if (isset ($_GET['agent_id'])) {
     <!-- Status + Action Bar -->
     <div class="agent-status-bar">
         <div class="d-flex align-items-center gap-2">
-            <span class="me-1" style="font-size:0.82rem;color:#3a4a5c;font-weight:600;">Status:</span>
+            <span class="me-1" style="font-size:0.82rem;color:#1A1A1A;font-weight:600;">Status:</span>
             <?php
             $statusClass = 'status-available';
             if ($current_status === 'Offline') $statusClass = 'status-offline';
@@ -179,13 +179,13 @@ if (isset ($_GET['agent_id'])) {
                         <li>
                             <a class="dropdown-item <?php echo $current_status === 'Available' ? 'active' : ''; ?>"
                                 href="index.php?agent_id=<?php echo $agent_id; ?>&home">
-                                <i class="fas fa-check-circle me-1" style="color:#759CC9;"></i>Available
+                                <i class="fas fa-check-circle me-1" style="color:#1A1A1A;"></i>Available
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item <?php echo $current_status === 'Offline' ? 'active' : ''; ?>"
                                 href="index.php?agent_id=<?php echo $agent_id; ?>&takeToOffline">
-                                <i class="fas fa-moon me-1" style="color:#AEAEAE;"></i>Offline
+                                <i class="fas fa-moon me-1" style="color:#aaa;"></i>Offline
                             </a>
                         </li>
                     <?php } ?>

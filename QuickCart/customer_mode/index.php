@@ -19,17 +19,17 @@ if (isset($_GET['customer_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
     <style>
-        body { overflow-x: hidden; background: #EEECF1; }
+        body { overflow-x: hidden; background: #F7F2EB; }
 
         /* ── top bar ── */
         .cust-topbar {
-            background: linear-gradient(90deg, #759CC9 0%, #8FB1CC 100%);
-            border-bottom: 1px solid #5a85b5;
+            background: #1A1A1A;
+            border-bottom: 2px solid #FFE6CD;
             padding: 12px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(90,133,181,0.18);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.18);
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -47,7 +47,7 @@ if (isset($_GET['customer_id'])) {
             gap: 16px;
         }
         .cust-topbar .welcome-text {
-            color: #EEECF1;
+            color: #FFE6CD;
             font-size: 0.88rem;
             font-weight: 600;
         }
@@ -63,7 +63,7 @@ if (isset($_GET['customer_id'])) {
             position: absolute;
             top: -7px;
             right: -9px;
-            background: #3a4a5c;
+            background: #1A1A1A;
             color: #fff;
             font-size: 0.6rem;
             font-weight: 700;
@@ -95,14 +95,14 @@ if (isset($_GET['customer_id'])) {
         }
         .cust-page-title h4 {
             font-family: 'Playfair Display', serif;
-            color: #3a4a5c;
+            color: #1A1A1A;
             font-size: 1.3rem;
             margin: 0;
         }
         .title-divider {
             width: 50px;
             height: 3px;
-            background: linear-gradient(90deg, #759CC9, #ADC3D1);
+            background: linear-gradient(90deg, #1A1A1A, #FFE6CD);
             border-radius: 2px;
             margin: 6px auto 0;
         }
@@ -110,8 +110,8 @@ if (isset($_GET['customer_id'])) {
         /* ── action nav (same as admin) ── */
         .cust-action-nav {
             background: #fff;
-            border-top: 1px solid #ADC3D1;
-            border-bottom: 1px solid #ADC3D1;
+            border-top: 1px solid #FFE6CD;
+            border-bottom: 1px solid #FFE6CD;
             padding: 10px 20px;
             display: flex;
             flex-wrap: wrap;
@@ -127,33 +127,33 @@ if (isset($_GET['customer_id'])) {
             border-radius: 20px;
             font-size: 0.82rem;
             font-weight: 600;
-            color: #3a4a5c;
-            background: #EEECF1;
-            border: 1.5px solid #ADC3D1;
+            color: #1A1A1A;
+            background: #F7F2EB;
+            border: 1.5px solid #FFE6CD;
             text-decoration: none;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
-        .cust-nav-btn i { font-size: 0.78rem; color: #759CC9; }
+        .cust-nav-btn i { font-size: 0.78rem; color: #1A1A1A; }
         .cust-nav-btn:hover {
-            background: #dce8f3;
-            border-color: #759CC9;
-            color: #759CC9;
+            background: #FFE6CD;
+            border-color: #1A1A1A;
+            color: #1A1A1A;
             transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(90,133,181,0.18);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
         }
         .cust-nav-btn.logout-btn {
-            background: #f5f8fc;
-            border-color: #AEAEAE;
-            color: #949494;
+            background: #FFFFFF;
+            border-color: #e0d8d0;
+            color: #888;
         }
-        .cust-nav-btn.logout-btn i { color: #AEAEAE; }
+        .cust-nav-btn.logout-btn i { color: #aaa; }
         .cust-nav-btn.logout-btn:hover {
-            background: #EEECF1;
-            border-color: #759CC9;
-            color: #759CC9;
+            background: #F7F2EB;
+            border-color: #1A1A1A;
+            color: #1A1A1A;
         }
-        .cust-nav-btn.logout-btn:hover i { color: #759CC9; }
+        .cust-nav-btn.logout-btn:hover i { color: #1A1A1A; }
 
         /* search inside nav */
         .search-form {
@@ -162,19 +162,19 @@ if (isset($_GET['customer_id'])) {
             gap: 6px;
         }
         .search-form input {
-            border: 1.5px solid #ADC3D1;
+            border: 1.5px solid #FFE6CD;
             border-radius: 20px;
             padding: 5px 14px;
             font-size: 0.8rem;
             outline: none;
-            background: #f5f8fc;
-            color: #3d4a56;
+            background: #FFFFFF;
+            color: #1A1A1A;
             width: 160px;
             transition: border-color 0.2s;
         }
-        .search-form input:focus { border-color: #759CC9; }
+        .search-form input:focus { border-color: #1A1A1A; }
         .search-form button {
-            background: linear-gradient(135deg, #759CC9, #8FB1CC);
+            background: #1A1A1A;
             color: #fff;
             border: none;
             border-radius: 20px;
@@ -184,17 +184,17 @@ if (isset($_GET['customer_id'])) {
             cursor: pointer;
             transition: all 0.2s;
         }
-        .search-form button:hover { background: linear-gradient(135deg, #5a85b5, #759CC9); }
+        .search-form button:hover { background: rgba(0,0,0,0.85); }
 
         /* ── promo banner ── */
         .promo-banner {
-            background: linear-gradient(90deg, #dce8f3, #EEECF1, #dce8f3);
+            background: #FFE6CD;
             text-align: center;
             padding: 8px;
             font-size: 0.82rem;
-            color: #759CC9;
+            color: #1A1A1A;
             letter-spacing: 1px;
-            border-bottom: 1px solid #ADC3D1;
+            border-bottom: 1px solid #FFE6CD;
         }
 
         /* ── layout ── */
@@ -205,7 +205,7 @@ if (isset($_GET['customer_id'])) {
             width: 175px;
             min-width: 175px;
             background: #fff;
-            border-right: 1px solid #ADC3D1;
+            border-right: 1px solid #FFE6CD;
             padding: 20px 12px;
             position: sticky;
             top: 0;
@@ -213,27 +213,27 @@ if (isset($_GET['customer_id'])) {
         }
         .cat-sidebar h6 {
             font-family: 'Playfair Display', serif;
-            color: #3a4a5c;
+            color: #1A1A1A;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 14px;
             padding-bottom: 8px;
-            border-bottom: 2px solid #ADC3D1;
+            border-bottom: 2px solid #FFE6CD;
         }
         .cat-link {
             display: block;
             padding: 7px 10px;
             border-radius: 8px;
             font-size: 0.82rem;
-            color: #3d4a56;
+            color: #1A1A1A;
             text-decoration: none;
             margin-bottom: 3px;
             transition: background 0.2s, color 0.2s;
         }
         .cat-link:hover, .cat-link.cat-active {
-            background: #dce8f3;
-            color: #759CC9;
+            background: #FFE6CD;
+            color: #1A1A1A;
             font-weight: 600;
         }
         .cat-all-link {
@@ -241,11 +241,11 @@ if (isset($_GET['customer_id'])) {
             padding: 7px 10px;
             border-radius: 8px;
             font-size: 0.82rem;
-            color: #759CC9;
+            color: #1A1A1A;
             font-weight: 700;
             text-decoration: none;
             margin-bottom: 8px;
-            background: #EEECF1;
+            background: #F7F2EB;
         }
 
         /* ── products area ── */
@@ -254,7 +254,7 @@ if (isset($_GET['customer_id'])) {
         /* ── product card ── */
         .prod-card {
             background: #fff;
-            border: 1px solid #ADC3D1;
+            border: 1px solid #FFE6CD;
             border-radius: 16px;
             overflow: hidden;
             transition: box-shadow 0.3s, transform 0.3s;
@@ -262,17 +262,17 @@ if (isset($_GET['customer_id'])) {
             flex-direction: column;
         }
         .prod-card:hover {
-            box-shadow: 0 8px 28px rgba(90,133,181,0.18);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.12);
             transform: translateY(-4px);
         }
         .prod-card__img-wrap {
-            background: #f5f8fc;
+            background: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 160px;
             padding: 12px;
-            border-bottom: 1px solid #EEECF1;
+            border-bottom: 1px solid #F7F2EB;
         }
         .prod-card__img-wrap img {
             max-height: 130px;
@@ -289,13 +289,13 @@ if (isset($_GET['customer_id'])) {
             font-family: 'Playfair Display', serif;
             font-size: 0.95rem;
             font-weight: 700;
-            color: #3a4a5c;
+            color: #1A1A1A;
             margin-bottom: 5px;
             line-height: 1.3;
         }
         .prod-card__desc {
             font-size: 0.78rem;
-            color: #949494;
+            color: #888;
             line-height: 1.4;
             flex-grow: 1;
             margin-bottom: 12px;
@@ -308,10 +308,10 @@ if (isset($_GET['customer_id'])) {
         .prod-card__price {
             font-size: 1rem;
             font-weight: 700;
-            color: #759CC9;
+            color: #1A1A1A;
         }
         .prod-card__btn {
-            background: linear-gradient(135deg, #759CC9, #8FB1CC);
+            background: #1A1A1A;
             color: #fff;
             border: none;
             border-radius: 20px;
@@ -322,7 +322,7 @@ if (isset($_GET['customer_id'])) {
             transition: all 0.2s;
         }
         .prod-card__btn:hover {
-            background: linear-gradient(135deg, #5a85b5, #759CC9);
+            background: rgba(0,0,0,0.85);
             color: #fff;
             transform: translateY(-1px);
         }
@@ -339,30 +339,30 @@ if (isset($_GET['customer_id'])) {
             top: calc(100% + 10px);
             width: 310px;
             background: #fff;
-            border: 1px solid #ADC3D1;
+            border: 1px solid #FFE6CD;
             border-radius: 14px;
-            box-shadow: 0 8px 24px rgba(90,133,181,0.15);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
             z-index: 9999;
         }
         .cart-dropdown-wrap:hover .cart-dropdown-panel,
         .cart-dropdown-panel:hover { display: block; }
-        .cart-dropdown-header { padding: 12px; border-bottom: 1px solid #ADC3D1; text-align: center; }
-        .cart-dropdown-header h6 { font-family: 'Playfair Display', serif; color: #3a4a5c; margin: 0; font-size: 0.95rem; }
+        .cart-dropdown-header { padding: 12px; border-bottom: 1px solid #FFE6CD; text-align: center; }
+        .cart-dropdown-header h6 { font-family: 'Playfair Display', serif; color: #1A1A1A; margin: 0; font-size: 0.95rem; }
         .cart-scroll { max-height: 45vh; overflow-y: auto; }
         .cart-item {
             display: flex;
             gap: 10px;
             padding: 10px;
-            border-bottom: 1px solid #EEECF1;
+            border-bottom: 1px solid #F7F2EB;
         }
-        .cart-item img { width: 50px; height: 50px; object-fit: contain; border-radius: 8px; background: #f5f8fc; }
+        .cart-item img { width: 50px; height: 50px; object-fit: contain; border-radius: 8px; background: #FFFFFF; }
         .cart-item-info { flex: 1; }
-        .cart-item-name { font-size: 0.82rem; color: #3a4a5c; font-weight: 600; margin: 0 0 2px; }
-        .cart-item-price { font-size: 0.78rem; color: #949494; margin: 0 0 5px; }
+        .cart-item-name { font-size: 0.82rem; color: #1A1A1A; font-weight: 600; margin: 0 0 2px; }
+        .cart-item-price { font-size: 0.78rem; color: #888; margin: 0 0 5px; }
         .cart-item-actions { display: flex; align-items: center; gap: 8px; }
         .qty-btn {
-            background: #dce8f3;
-            color: #759CC9;
+            background: #FFE6CD;
+            color: #1A1A1A;
             border: none;
             border-radius: 50%;
             width: 22px; height: 22px;
@@ -374,12 +374,12 @@ if (isset($_GET['customer_id'])) {
             text-decoration: none;
             transition: background 0.2s;
         }
-        .qty-btn:hover { background: #ADC3D1; color: #fff; }
-        .remove-btn { color: #759CC9; font-size: 0.75rem; text-decoration: none; margin-left: 6px; }
-        .remove-btn:hover { color: #5a85b5; }
+        .qty-btn:hover { background: #1A1A1A; color: #FFE6CD; }
+        .remove-btn { color: #1A1A1A; font-size: 0.75rem; text-decoration: none; margin-left: 6px; }
+        .remove-btn:hover { color: #1A1A1A; }
         .cart-dropdown-footer {
             padding: 10px;
-            border-top: 1px solid #ADC3D1;
+            border-top: 1px solid #FFE6CD;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -425,7 +425,7 @@ $next_page     = ($totalPrice <= $walletBalance) ? "checkout.php?customer_id=$cu
                 <div class="cart-dropdown-header"><h6><i class="fas fa-shopping-cart me-1"></i>My Cart</h6></div>
                 <div class="cart-scroll"><?php show_cart($cust_id); ?></div>
                 <div class="cart-dropdown-footer">
-                    <strong style="color:#759CC9;">₹<?php echo $totalPrice; ?></strong>
+                    <strong style="color:#1A1A1A;">₹<?php echo $totalPrice; ?></strong>
                     <a href="<?php echo $next_page; ?>" onclick="return confirmCheckout()" class="btn btn-pastel btn-sm">Checkout</a>
                 </div>
             </div>

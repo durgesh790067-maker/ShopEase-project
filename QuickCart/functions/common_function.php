@@ -210,11 +210,11 @@ function viewPendingOrders($admin_id) {
     global $con;
     $order_result = mysqli_query($con, "SELECT * FROM `order` WHERE status = 'Confirmed' ORDER BY orderID DESC;");
     if (mysqli_num_rows($order_result) == 0) {
-        echo "<div class='text-center py-5'><i class='fas fa-check-circle' style='font-size:2.5rem;color:#759CC9;'></i><p class='mt-3' style='color:#949494;'>No pending orders right now.</p></div>";
+        echo "<div class='text-center py-5'><i class='fas fa-check-circle' style='font-size:2.5rem;color:#1A1A1A;'></i><p class='mt-3' style='color:#888;'>No pending orders right now.</p></div>";
     } else {
         ?>
         <div class="container my-3">
-            <h4 class='text-center mb-4' style='font-family:Playfair Display,serif;color:#3a4a5c;'>Pending Orders</h4>
+            <h4 class='text-center mb-4' style='font-family:Playfair Display,serif;color:#1A1A1A;'>Pending Orders</h4>
             <div class="table-responsive">
             <table class='table table-bordered align-middle'>
                 <thead>
@@ -262,15 +262,15 @@ function viewDeliveringOrders($agent_id) {
     global $con;
     $result_confirmed = mysqli_query($con, "SELECT * FROM `order` WHERE status = 'Confirmed' AND agentID = '$agent_id' ORDER BY orderID DESC;");
     if (mysqli_num_rows($result_confirmed) != 0) {
-        echo "<div class='text-center py-4'><i class='fas fa-store' style='font-size:2rem;color:#759CC9;'></i><p class='mt-2' style='color:#3a4a5c;'>You have a confirmed order — please go to the store and wait while it is packed.</p></div>";
+        echo "<div class='text-center py-4'><i class='fas fa-store' style='font-size:2rem;color:#1A1A1A;'></i><p class='mt-2' style='color:#1A1A1A;'>You have a confirmed order — please go to the store and wait while it is packed.</p></div>";
     } else {
         $order_result = mysqli_query($con, "SELECT * FROM `order` WHERE status = 'Packed and Shipped' AND agentID = '$agent_id' ORDER BY orderID DESC;");
         if (mysqli_num_rows($order_result) == 0) {
-            echo "<div class='text-center py-5'><i class='fas fa-check-circle' style='font-size:2.5rem;color:#759CC9;'></i><p class='mt-3' style='color:#949494;'>No orders to deliver right now.</p></div>";
+            echo "<div class='text-center py-5'><i class='fas fa-check-circle' style='font-size:2.5rem;color:#1A1A1A;'></i><p class='mt-3' style='color:#888;'>No orders to deliver right now.</p></div>";
         } else {
             ?>
             <div class="container my-3">
-                <h4 class='text-center mb-4' style='font-family:Playfair Display,serif;color:#3a4a5c;'>Orders to Deliver</h4>
+                <h4 class='text-center mb-4' style='font-family:Playfair Display,serif;color:#1A1A1A;'>Orders to Deliver</h4>
                 <div class="table-responsive">
                 <table class='table table-bordered align-middle'>
                     <thead>
@@ -313,11 +313,11 @@ function viewDeliveryHistory($agent_id) {
     global $con;
     $order_result = mysqli_query($con, "SELECT * FROM `order` WHERE status = 'Delivered' AND agentID = '$agent_id' ORDER BY orderID DESC;");
     if (mysqli_num_rows($order_result) == 0) {
-        echo "<div class='text-center py-5'><i class='fas fa-history' style='font-size:2.5rem;color:#759CC9;'></i><p class='mt-3' style='color:#949494;'>No delivery history yet.</p></div>";
+        echo "<div class='text-center py-5'><i class='fas fa-history' style='font-size:2.5rem;color:#1A1A1A;'></i><p class='mt-3' style='color:#888;'>No delivery history yet.</p></div>";
     } else {
         ?>
         <div class="container my-3">
-            <h4 class='text-center mb-4' style='font-family:Playfair Display,serif;color:#3a4a5c;'>Delivery History</h4>
+            <h4 class='text-center mb-4' style='font-family:Playfair Display,serif;color:#1A1A1A;'>Delivery History</h4>
             <div class="table-responsive">
             <table class='table table-bordered align-middle'>
                 <thead>
