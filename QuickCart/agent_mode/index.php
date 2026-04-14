@@ -194,13 +194,13 @@ if (isset ($_GET['agent_id'])) {
         </div>
 
         <div class="agent-action-nav">
-            <a href="profile_page.php?agent_id=<?php echo $agent_id; ?>" class="agent-nav-btn">
+            <a href="profile_page.php?agent_id=<?php echo $agent_id; ?>&view_profile" class="agent-nav-btn">
                 <i class="fas fa-user"></i> My Profile
             </a>
-            <a href="agent_history.php?agent_id=<?php echo $agent_id; ?>" class="agent-nav-btn">
+            <a href="profile_page.php?agent_id=<?php echo $agent_id; ?>&history" class="agent-nav-btn">
                 <i class="fas fa-history"></i> History
             </a>
-            <a href="wallet_history.php?agent_id=<?php echo $agent_id; ?>" class="agent-nav-btn">
+            <a href="profile_page.php?agent_id=<?php echo $agent_id; ?>&wallet_history" class="agent-nav-btn">
                 <i class="fas fa-wallet"></i> Wallet
             </a>
             <a href="../start.php" class="agent-nav-btn logout-btn">
