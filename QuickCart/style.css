@@ -7,38 +7,38 @@
 }
 
 body {
-    background-color: #fdf6f0;
+    background-color: #EEECF1;
     font-family: 'Lato', sans-serif;
-    color: #5a3e3e;
+    color: #3d4a56;
 }
 
 /* ── Navbar ── */
 .bg-pastel {
-    background: linear-gradient(90deg, #e8c4c4 0%, #f2d4d4 100%) !important;
-    border-bottom: 1px solid #d4a5a5;
-    box-shadow: 0 2px 8px rgba(180,120,120,0.12);
+    background: linear-gradient(90deg, #759CC9 0%, #8FB1CC 100%) !important;
+    border-bottom: 1px solid #5a85b5;
+    box-shadow: 0 2px 8px rgba(90,133,181,0.18);
 }
 
 .bg-pastel .navbar-brand,
 .bg-pastel .nav-link,
 .bg-pastel .navbar-brand i {
-    color: #7d4a4a !important;
+    color: #fff !important;
     font-family: 'Playfair Display', serif;
     font-weight: 600;
     letter-spacing: 0.5px;
 }
 
 .bg-pastel .nav-link:hover {
-    color: #c97b7b !important;
+    color: #EEECF1 !important;
 }
 
 .bg-pastel .navbar-toggler {
-    border-color: #c97b7b;
+    border-color: #EEECF1;
 }
 
 /* ── Buttons ── */
 .btn-pastel, .btn-info {
-    background: linear-gradient(135deg, #c97b7b, #d4a5a5) !important;
+    background: linear-gradient(135deg, #759CC9, #8FB1CC) !important;
     color: #fff !important;
     border: none !important;
     border-radius: 25px;
@@ -46,27 +46,27 @@ body {
     font-weight: 600;
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(180,120,120,0.25);
+    box-shadow: 0 3px 10px rgba(90,133,181,0.25);
 }
 
 .btn-pastel:hover, .btn-info:hover {
-    background: linear-gradient(135deg, #b56868, #c97b7b) !important;
-    box-shadow: 0 5px 15px rgba(180,120,120,0.4);
+    background: linear-gradient(135deg, #5a85b5, #759CC9) !important;
+    box-shadow: 0 5px 15px rgba(90,133,181,0.4);
     transform: translateY(-1px);
     color: #fff !important;
 }
 
 /* ── Cards ── */
 .card {
-    border: 1px solid #f0d5d5;
+    border: 1px solid #ADC3D1;
     border-radius: 16px;
-    background: #fff8f5;
-    box-shadow: 0 4px 18px rgba(180,120,120,0.10);
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(90,133,181,0.10);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .card:hover {
-    box-shadow: 0 8px 28px rgba(180,120,120,0.20);
+    box-shadow: 0 8px 28px rgba(90,133,181,0.20);
     transform: translateY(-3px);
 }
 
@@ -81,23 +81,23 @@ body {
 
 /* ── Form Controls ── */
 .form-control, .form-select {
-    border: 1.5px solid #e8c4c4;
+    border: 1.5px solid #ADC3D1;
     border-radius: 10px;
-    background: #fff8f5;
-    color: #5a3e3e;
+    background: #f5f8fc;
+    color: #3d4a56;
     padding: 10px 16px;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-control:focus, .form-select:focus {
-    border-color: #c97b7b;
-    box-shadow: 0 0 0 3px rgba(201,123,123,0.15);
+    border-color: #759CC9;
+    box-shadow: 0 0 0 3px rgba(117,156,201,0.18);
     background: #fff;
     outline: none;
 }
 
 .form-label {
-    color: #7d4a4a;
+    color: #3a4a5c;
     font-weight: 600;
     font-size: 0.9rem;
     letter-spacing: 0.3px;
@@ -106,43 +106,43 @@ body {
 /* ── Section Headings ── */
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
-    color: #7d4a4a;
+    color: #3a4a5c;
 }
 
 /* ── Login / Register Card ── */
 .auth-card {
     background: #fff;
     border-radius: 20px;
-    box-shadow: 0 8px 40px rgba(180,120,120,0.18);
+    box-shadow: 0 8px 40px rgba(90,133,181,0.15);
     padding: 40px;
-    border: 1px solid #f0d5d5;
+    border: 1px solid #ADC3D1;
 }
 
 .auth-card .auth-title {
     font-family: 'Playfair Display', serif;
-    color: #7d4a4a;
+    color: #3a4a5c;
     font-size: 1.9rem;
     font-weight: 700;
     margin-bottom: 6px;
 }
 
 .auth-card .auth-subtitle {
-    color: #b58585;
+    color: #949494;
     font-size: 0.9rem;
     margin-bottom: 28px;
 }
 
 .auth-card .brand-icon {
     font-size: 2.5rem;
-    color: #c97b7b;
+    color: #759CC9;
     margin-bottom: 10px;
 }
 
 /* ── Footer ── */
 .footer {
-    background: linear-gradient(90deg, #e8c4c4 0%, #f2d4d4 100%);
-    color: #7d4a4a !important;
-    border-top: 1px solid #d4a5a5;
+    background: linear-gradient(90deg, #759CC9 0%, #8FB1CC 100%);
+    color: #fff !important;
+    border-top: 1px solid #5a85b5;
     font-family: 'Lato', sans-serif;
     font-size: 0.88rem;
     letter-spacing: 0.3px;
@@ -150,39 +150,39 @@ h1, h2, h3 {
 
 /* ── Table ── */
 table {
-    background: #fff8f5;
+    background: #fff;
 }
 
 .table th {
-    background: #f2d4d4;
-    color: #7d4a4a;
+    background: #ADC3D1;
+    color: #fff;
     font-family: 'Playfair Display', serif;
-    border-color: #e8c4c4;
+    border-color: #AEAEAE;
 }
 
 .table td {
-    border-color: #f0e0e0;
-    color: #5a3e3e;
+    border-color: #EEECF1;
+    color: #3d4a56;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) > * {
-    background-color: #fff8f5;
+    background-color: #f5f8fc;
 }
 
 /* ── Navbar button tiles (admin) ── */
 .nav-link.bg-pastel-tile {
-    background: #f9e8e8;
-    border: 1.5px solid #e8c4c4;
+    background: #dce8f3;
+    border: 1.5px solid #ADC3D1;
     border-radius: 12px;
-    color: #7d4a4a !important;
+    color: #3a4a5c !important;
     font-weight: 600;
     transition: all 0.2s ease;
 }
 
 .nav-link.bg-pastel-tile:hover {
-    background: #e8c4c4;
+    background: #ADC3D1;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(180,120,120,0.2);
+    box-shadow: 0 4px 12px rgba(90,133,181,0.2);
 }
 
 /* ── Alerts ── */
@@ -193,17 +193,17 @@ table {
 
 /* ── Badge ── */
 .badge {
-    background-color: #c97b7b !important;
+    background-color: #759CC9 !important;
 }
 
 /* ── Dropdown ── */
 .dropdown-menu {
-    border: 1px solid #f0d5d5;
+    border: 1px solid #ADC3D1;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(180,120,120,0.15);
+    box-shadow: 0 8px 24px rgba(90,133,181,0.15);
 }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #fdf6f0; }
-::-webkit-scrollbar-thumb { background: #d4a5a5; border-radius: 4px; }
+::-webkit-scrollbar-track { background: #EEECF1; }
+::-webkit-scrollbar-thumb { background: #AEAEAE; border-radius: 4px; }

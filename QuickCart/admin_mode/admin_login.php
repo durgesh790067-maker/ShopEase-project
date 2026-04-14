@@ -11,15 +11,15 @@
     <style>
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #fdf6f0 0%, #f9e8e8 50%, #fdf0f5 100%);
+            background: linear-gradient(135deg, #EEECF1 0%, #dce8f3 50%, #EEECF1 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 30px 15px;
         }
         .auth-wrap { width: 100%; max-width: 440px; }
-        .back-link { color: #b58585; font-size: 0.88rem; text-decoration: none; display: inline-block; margin-bottom: 20px; }
-        .back-link:hover { color: #c97b7b; }
+        .back-link { color: #949494; font-size: 0.88rem; text-decoration: none; display: inline-block; margin-bottom: 20px; }
+        .back-link:hover { color: #759CC9; }
     </style>
 </head>
 <body>

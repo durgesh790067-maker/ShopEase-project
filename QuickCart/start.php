@@ -10,7 +10,7 @@
     <style>
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #fdf6f0 0%, #f9e8e8 50%, #fdf0f5 100%);
+            background: linear-gradient(135deg, #EEECF1 0%, #dce8f3 50%, #EEECF1 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -20,28 +20,28 @@
         }
         .brand-logo {
             font-size: 3.5rem;
-            color: #c97b7b;
+            color: #759CC9;
             margin-bottom: 10px;
-            filter: drop-shadow(0 4px 8px rgba(201,123,123,0.3));
+            filter: drop-shadow(0 4px 8px rgba(117,156,201,0.35));
         }
         .brand-name {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
             font-weight: 700;
-            color: #7d4a4a;
+            color: #3a4a5c;
             letter-spacing: 1px;
             margin-bottom: 6px;
         }
         .brand-tagline {
             font-size: 1rem;
-            color: #b58585;
+            color: #949494;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 50px;
         }
         .role-card {
             background: #fff;
-            border: 1.5px solid #f0d5d5;
+            border: 1.5px solid #ADC3D1;
             border-radius: 20px;
             padding: 30px 25px;
             width: 160px;
@@ -53,23 +53,23 @@
             align-items: center;
             gap: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 18px rgba(180,120,120,0.10);
+            box-shadow: 0 4px 18px rgba(90,133,181,0.10);
         }
         .role-card:hover {
-            background: linear-gradient(135deg, #f9e8e8, #fdf0f5);
+            background: linear-gradient(135deg, #dce8f3, #EEECF1);
             transform: translateY(-6px);
-            box-shadow: 0 10px 30px rgba(180,120,120,0.25);
-            border-color: #c97b7b;
+            box-shadow: 0 10px 30px rgba(90,133,181,0.25);
+            border-color: #759CC9;
         }
         .role-icon {
             font-size: 2.2rem;
-            color: #c97b7b;
+            color: #759CC9;
         }
         .role-label {
             font-family: 'Playfair Display', serif;
             font-size: 1rem;
             font-weight: 600;
-            color: #7d4a4a;
+            color: #3a4a5c;
         }
         .roles-wrapper {
             display: flex;
@@ -79,13 +79,13 @@
         .divider {
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, #c97b7b, #f2c4ce);
+            background: linear-gradient(90deg, #759CC9, #ADC3D1);
             border-radius: 2px;
             margin: 0 auto 20px;
         }
         .select-text {
             font-size: 0.85rem;
-            color: #b58585;
+            color: #949494;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 30px;
@@ -111,6 +111,6 @@
             <span class="role-label">Delivery Agent</span>
         </a>
     </div>
-    <p style="margin-top:50px; font-size:0.78rem; color:#c9a8a8;">© 2026, Durgesh and Roshni BCA</p>
+    <p style="margin-top:50px; font-size:0.78rem; color:#AEAEAE;">© 2026, Durgesh and Roshni BCA</p>
 </body>
 </html>

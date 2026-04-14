@@ -16,25 +16,26 @@ if (isset($_GET['admin_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
     <style>
-        body { overflow-x: hidden; background: #fdf6f0; }
+        body { overflow-x: hidden; background: #EEECF1; }
 
         /* ── top navbar ── */
         .admin-topbar {
-            background: linear-gradient(90deg, #e8c4c4 0%, #f2d4d4 100%);
-            border-bottom: 1px solid #d4a5a5;
+            background: linear-gradient(90deg, #759CC9 0%, #8FB1CC 100%);
+            border-bottom: 1px solid #5a85b5;
             padding: 12px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(90,133,181,0.18);
         }
         .admin-topbar .brand {
             font-family: 'Playfair Display', serif;
             font-size: 1.25rem;
             font-weight: 700;
-            color: #7d4a4a;
+            color: #fff;
             text-decoration: none;
         }
-        .admin-topbar .brand i { margin-right: 6px; color: #c97b7b; }
+        .admin-topbar .brand i { margin-right: 6px; color: #EEECF1; }
         .admin-topbar .topbar-right {
             display: flex;
             align-items: center;
@@ -42,11 +43,15 @@ if (isset($_GET['admin_id'])) {
             font-size: 0.88rem;
         }
         .admin-topbar a {
-            color: #7d4a4a;
+            color: #fff;
             text-decoration: none;
             font-weight: 600;
         }
-        .admin-topbar a:hover { color: #c97b7b; }
+        .admin-topbar a:hover { color: #EEECF1; }
+        .admin-topbar .welcome-text {
+            color: #EEECF1;
+            font-size: 0.88rem;
+        }
 
         /* ── page title ── */
         .admin-page-title {
@@ -55,14 +60,14 @@ if (isset($_GET['admin_id'])) {
         }
         .admin-page-title h4 {
             font-family: 'Playfair Display', serif;
-            color: #7d4a4a;
+            color: #3a4a5c;
             font-size: 1.4rem;
             margin: 0;
         }
         .title-divider {
             width: 50px;
             height: 3px;
-            background: linear-gradient(90deg, #c97b7b, #f2c4ce);
+            background: linear-gradient(90deg, #759CC9, #ADC3D1);
             border-radius: 2px;
             margin: 8px auto 0;
         }
@@ -70,8 +75,8 @@ if (isset($_GET['admin_id'])) {
         /* ── action nav ── */
         .admin-action-nav {
             background: #fff;
-            border-top: 1px solid #f0d5d5;
-            border-bottom: 1px solid #f0d5d5;
+            border-top: 1px solid #ADC3D1;
+            border-bottom: 1px solid #ADC3D1;
             padding: 12px 20px;
             display: flex;
             flex-wrap: wrap;
@@ -86,30 +91,33 @@ if (isset($_GET['admin_id'])) {
             border-radius: 20px;
             font-size: 0.82rem;
             font-weight: 600;
-            color: #7d4a4a;
-            background: #fdf6f0;
-            border: 1.5px solid #e8c4c4;
+            color: #3a4a5c;
+            background: #EEECF1;
+            border: 1.5px solid #ADC3D1;
             text-decoration: none;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
-        .admin-nav-btn i { font-size: 0.78rem; color: #c97b7b; }
+        .admin-nav-btn i { font-size: 0.78rem; color: #759CC9; }
         .admin-nav-btn:hover {
-            background: #f9e8e8;
-            border-color: #c97b7b;
-            color: #c97b7b;
+            background: #dce8f3;
+            border-color: #759CC9;
+            color: #759CC9;
             transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(180,120,120,0.15);
+            box-shadow: 0 3px 10px rgba(90,133,181,0.18);
         }
         .admin-nav-btn.logout-btn {
-            background: #fff0f0;
-            border-color: #f0b8b8;
-            color: #b56868;
+            background: #f5f8fc;
+            border-color: #AEAEAE;
+            color: #949494;
         }
+        .admin-nav-btn.logout-btn i { color: #AEAEAE; }
         .admin-nav-btn.logout-btn:hover {
-            background: #ffe0e0;
-            border-color: #c97b7b;
+            background: #EEECF1;
+            border-color: #759CC9;
+            color: #759CC9;
         }
+        .admin-nav-btn.logout-btn:hover i { color: #759CC9; }
 
         /* ── content area ── */
         .admin-content { padding: 24px; }
@@ -129,13 +137,13 @@ if (isset($_GET['admin_id'])) {
         <a href="index.php?admin_id=<?php echo $admin_id; ?>&home">
             <i class="fas fa-home me-1"></i>Home
         </a>
-        <span style="color:#b58585;"><i class="fas fa-user-shield me-1"></i>Welcome, <strong><?php echo $name; ?></strong></span>
+        <span class="welcome-text"><i class="fas fa-user-shield me-1"></i>Welcome, <strong><?php echo $name; ?></strong></span>
     </div>
 </div>
 
 <!-- Page Title -->
 <div class="admin-page-title">
-    <h4><i class="fas fa-boxes me-2" style="color:#c97b7b;"></i>Manage Inventory &amp; View Analysis</h4>
+    <h4><i class="fas fa-boxes me-2" style="color:#759CC9;"></i>Manage Inventory &amp; View Analysis</h4>
     <div class="title-divider"></div>
 </div>
 

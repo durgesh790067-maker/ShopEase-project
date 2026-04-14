@@ -11,15 +11,15 @@
     <style>
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #fdf6f0 0%, #f9e8e8 50%, #fdf0f5 100%);
+            background: linear-gradient(135deg, #EEECF1 0%, #dce8f3 50%, #EEECF1 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 30px 15px;
         }
         .auth-wrap { width: 100%; max-width: 440px; }
-        .back-link { color: #b58585; font-size: 0.88rem; text-decoration: none; display: inline-block; margin-bottom: 20px; }
-        .back-link:hover { color: #c97b7b; }
+        .back-link { color: #949494; font-size: 0.88rem; text-decoration: none; display: inline-block; margin-bottom: 20px; }
+        .back-link:hover { color: #759CC9; }
     </style>
 </head>
 <body>
@@ -39,9 +39,9 @@
                     <input type="password" class="form-control" placeholder="Enter your password" autocomplete="off" required name="password"/>
                 </div>
                 <input type="submit" value="Sign In" class="btn btn-pastel w-100 mb-3" name="delivery_login">
-                <p class="mb-0" style="font-size:0.88rem; color:#b58585;">
+                <p class="mb-0" style="font-size:0.88rem; color:#949494;">
                     New agent?
-                    <a href="delivery_signup.php" style="color:#c97b7b; font-weight:600;"> Register here</a>
+                    <a href="delivery_signup.php" style="color:#759CC9; font-weight:600;"> Register here</a>
                 </p>
             </form>
         </div>
