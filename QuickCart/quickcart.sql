@@ -276,7 +276,17 @@ INSERT INTO product (name, price, stock, brand, qty_bought, description, prod_im
 ('Lays Classic Salted 52g', 20.00, 80, 'Lays', 0, 'Classic salted potato chips — light, crispy and irresistible.', 'lays-chips.png', 3),
 ('Kinder Joy', 45.00, 60, 'Ferrero', 0, 'Delightful chocolate treat with a surprise toy inside for kids.', 'kinder-joy.png', 4),
 ('Green Tea 25 Bags', 149.99, 40, 'Lipton', 0, 'Refreshing green tea packed with antioxidants for a healthy lifestyle.', 'green-tea.png', 5),
-('Atomic Habits', 399.00, 30, 'James Clear', 0, 'The life-changing bestseller on building good habits and breaking bad ones.', 'atomic-habits.png', 10);
+('Atomic Habits', 399.00, 30, 'James Clear', 0, 'The life-changing bestseller on building good habits and breaking bad ones.', 'atomic-habits.png', 10),
+('Fresh Paneer 200g', 89.00, 35, 'Amul', 0, 'Soft and creamy cottage cheese, perfect for curries, snacks and desserts.', 'paneer.png', 1),
+('Oranges 6pcs', 59.00, 50, 'QuickCart', 0, 'Juicy and sweet oranges, a powerhouse of Vitamin C and natural freshness.', 'orange.png', 2),
+('Vitamin C 500mg 30 Tabs', 199.00, 45, 'Himalaya', 0, 'Daily immunity booster with 500mg Vitamin C to keep you energised and healthy.', 'vitamin-c.png', 5),
+('Neem Face Wash 100ml', 149.00, 60, 'Himalaya', 0, 'Gentle neem-based face wash that removes impurities and controls excess oil.', 'face-wash.png', 8),
+('Stainless Steel Bottle 1L', 349.00, 25, 'Milton', 0, 'Leak-proof, double-wall insulated bottle that keeps drinks cold or hot for hours.', 'steel-bottle.png', 9),
+('Turmeric Powder 100g', 55.00, 40, 'Everest', 0, 'Rich golden turmeric with high curcumin content — earthy, warm and aromatic.', 'turmeric.png', 7),
+('Packaged Water 1L', 20.00, 100, 'Bisleri', 0, 'Pure, safe and refreshing packaged drinking water from trusted source.', 'water-bottle.png', 6),
+('Dark Chocolate 80g', 129.00, 30, 'Bournville', 0, 'Rich and intense dark chocolate made with finest cocoa beans — a true indulgence.', 'milk-chocolate.jpg', 4),
+('Aloe Vera Gel 200ml', 179.00, 40, 'Mamaearth', 0, 'Pure soothing aloe vera gel that hydrates, cools and heals skin naturally.', 'body-lotion.png', 8),
+('Gummy Bears 100g', 99.00, 55, 'Haribo', 0, 'Fun and fruity gummy bears in assorted flavours — a favourite for all ages.', 'kinder-joy.png', 3);
 
 SELECT * FROM product;
 
