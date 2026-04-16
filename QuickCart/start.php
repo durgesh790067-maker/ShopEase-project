@@ -69,7 +69,7 @@
     <div class="divider"></div>
     <p class="select-text">Please select your role to continue</p>
     <div class="roles-wrapper">
-        <a href="./customer_mode/customer_login.php" class="role-card">
+        <a href="./customer_mode/index.php" class="role-card">
             <span class="role-icon"><i class="fas fa-user"></i></span>
             <span class="role-label">Customer</span>
         </a>

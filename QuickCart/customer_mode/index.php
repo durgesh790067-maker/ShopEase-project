@@ -1,12 +1,45 @@
 <?php
 include ('../functions/common_function.php');
 
+$cust_id   = null;
+$cust_name = '';
+$is_guest  = true;
+
+// ── Handle modal login POST ──────────────────────────────────────────────────
+if (isset($_POST['modal_login'])) {
+    $email    = $_POST['modal_email'];
+    $password = $_POST['modal_password'];
+    $pending  = isset($_POST['pending_product']) ? intval($_POST['pending_product']) : 0;
+    $result   = mysqli_query($con, "SELECT * FROM customer WHERE email='$email' AND password='$password';");
+    if (mysqli_num_rows($result) > 0) {
+        $row         = mysqli_fetch_assoc($result);
+        $customer_id = $row['customerID'];
+        if ($pending > 0) {
+            header("Location: index.php?customer_id=$customer_id&add_to_cart=$pending");
+        } else {
+            header("Location: index.php?customer_id=$customer_id");
+        }
+        exit();
+    } else {
+        $login_error = "Invalid email or password. Please try again.";
+        $reopen_modal = true;
+        $pending_product_reopen = isset($_POST['pending_product']) ? intval($_POST['pending_product']) : 0;
+    }
+}
+
+// ── Identify logged-in customer ──────────────────────────────────────────────
 if (isset($_GET['customer_id'])) {
-    $cust_id = $_GET['customer_id'];
+    $cust_id = intval($_GET['customer_id']);
     $result_get = mysqli_query($con, "SELECT * FROM customer WHERE customerID = $cust_id;");
-    $row_data = mysqli_fetch_assoc($result_get);
-    $cust_id   = $row_data["customerID"];
-    $cust_name = trim($row_data['first_name'] . ' ' . ($row_data['last_name'] ?? ''));
+    $row_data   = mysqli_fetch_assoc($result_get);
+    if ($row_data) {
+        $cust_id   = $row_data["customerID"];
+        $cust_name = trim($row_data['first_name'] . ' ' . ($row_data['last_name'] ?? ''));
+        $is_guest  = false;
+    } else {
+        $cust_id  = null;
+        $is_guest = true;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -88,6 +121,40 @@ if (isset($_GET['customer_id'])) {
             gap: 5px;
         }
 
+        /* guest topbar buttons */
+        .topbar-login-btn {
+            background: transparent;
+            color: #FFE6CD;
+            border: 1.5px solid #FFE6CD;
+            border-radius: 20px;
+            padding: 5px 16px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .topbar-login-btn:hover {
+            background: #FFE6CD;
+            color: #1A1A1A;
+        }
+        .topbar-register-btn {
+            background: #FFE6CD;
+            color: #1A1A1A;
+            border: 1.5px solid #FFE6CD;
+            border-radius: 20px;
+            padding: 5px 16px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .topbar-register-btn:hover {
+            background: #fff;
+            color: #1A1A1A;
+            border-color: #fff;
+        }
+
         /* ── page title ── */
         .cust-page-title {
             text-align: center;
@@ -107,7 +174,7 @@ if (isset($_GET['customer_id'])) {
             margin: 6px auto 0;
         }
 
-        /* ── action nav (same as admin) ── */
+        /* ── action nav ── */
         .cust-action-nav {
             background: #fff;
             border-top: 1px solid #FFE6CD;
@@ -320,6 +387,7 @@ if (isset($_GET['customer_id'])) {
             font-weight: 600;
             text-decoration: none;
             transition: all 0.2s;
+            cursor: pointer;
         }
         .prod-card__btn:hover {
             background: rgba(0,0,0,0.85);
@@ -385,53 +453,180 @@ if (isset($_GET['customer_id'])) {
             align-items: center;
         }
 
+        /* ── Login Modal styles ── */
+        .login-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-modal-overlay.active { display: flex; }
+        .login-modal-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 36px 32px 28px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+            position: relative;
+            animation: slideUp 0.25s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+        .login-modal-close {
+            position: absolute;
+            top: 14px; right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #aaa;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .login-modal-close:hover { color: #1A1A1A; }
+        .login-modal-icon {
+            font-size: 2.2rem;
+            color: #1A1A1A;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .login-modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .login-modal-hint {
+            text-align: center;
+            font-size: 0.83rem;
+            color: #888;
+            margin-bottom: 22px;
+        }
+        .login-modal-hint strong { color: #1A1A1A; }
+        .login-modal-error {
+            background: #fff3f3;
+            border: 1px solid #f5c6cb;
+            color: #842029;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .modal-form-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .modal-form-input {
+            width: 100%;
+            border: 1.5px solid #FFE6CD;
+            border-radius: 10px;
+            padding: 9px 14px;
+            font-size: 0.85rem;
+            color: #1A1A1A;
+            background: #FAFAFA;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 14px;
+        }
+        .modal-form-input:focus { border-color: #1A1A1A; }
+        .modal-submit-btn {
+            width: 100%;
+            background: #1A1A1A;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 4px;
+        }
+        .modal-submit-btn:hover { background: rgba(0,0,0,0.82); }
+        .modal-register-link {
+            text-align: center;
+            font-size: 0.83rem;
+            color: #888;
+            margin-top: 14px;
+        }
+        .modal-register-link a {
+            color: #1A1A1A;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .modal-register-link a:hover { text-decoration: underline; }
+
         /* responsive */
         @media(max-width:768px) {
             .cat-sidebar { display: none; }
             .products-area { padding: 12px; }
             .search-form input { width: 110px; }
             .cust-topbar { padding: 10px 14px; }
+            .login-modal-box { margin: 16px; padding: 28px 20px 22px; }
         }
     </style>
 </head>
 <body>
 
 <?php
-add_to_Cart($cust_id);
-remove_cart($cust_id);
-updateCart($cust_id);
-$totalPrice    = total_cart($cust_id);
-$walletBalance = wallet($cust_id);
-$valid_order   = check_stock($cust_id);
-$total_items   = cart_total_item($cust_id);
-$next_page     = ($totalPrice <= $walletBalance) ? "checkout.php?customer_id=$cust_id" : "";
+if (!$is_guest) {
+    add_to_Cart($cust_id);
+    remove_cart($cust_id);
+    updateCart($cust_id);
+    $totalPrice    = total_cart($cust_id);
+    $walletBalance = wallet($cust_id);
+    $valid_order   = check_stock($cust_id);
+    $total_items   = cart_total_item($cust_id);
+    $next_page     = ($totalPrice <= $walletBalance) ? "checkout.php?customer_id=$cust_id" : "";
+}
 ?>
 
 <!-- Top bar -->
 <div class="cust-topbar">
-    <a href="index.php?customer_id=<?php echo $cust_id; ?>" class="brand">
+    <a href="index.php<?php echo !$is_guest ? '?customer_id='.$cust_id : ''; ?>" class="brand">
         <i class="fas fa-shopping-bag"></i> ShopEase
     </a>
     <div class="topbar-right">
-        <span class="wallet-pill"><i class="fas fa-wallet"></i> ₹<?php echo $walletBalance; ?></span>
-
-        <!-- Cart hover dropdown -->
-        <div class="cart-dropdown-wrap">
-            <a href="#" class="cart-topbar-btn">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count"><?php cart_item($cust_id); ?></span>
+        <?php if ($is_guest): ?>
+            <span style="color:#FFE6CD; font-size:0.82rem;">Browse freely &amp; login when you're ready</span>
+            <button class="topbar-login-btn" onclick="openLoginModal(0)">
+                <i class="fas fa-sign-in-alt me-1"></i> Login
+            </button>
+            <a href="customer_registration.php" class="topbar-register-btn">
+                <i class="fas fa-user-plus me-1"></i> Register
             </a>
-            <div class="cart-dropdown-panel">
-                <div class="cart-dropdown-header"><h6><i class="fas fa-shopping-cart me-1"></i>My Cart</h6></div>
-                <div class="cart-scroll"><?php show_cart($cust_id); ?></div>
-                <div class="cart-dropdown-footer">
-                    <strong style="color:#1A1A1A;">₹<?php echo $totalPrice; ?></strong>
-                    <a href="<?php echo $next_page; ?>" onclick="return confirmCheckout()" class="btn btn-pastel btn-sm">Checkout</a>
+        <?php else: ?>
+            <span class="wallet-pill"><i class="fas fa-wallet"></i> ₹<?php echo $walletBalance; ?></span>
+
+            <!-- Cart hover dropdown -->
+            <div class="cart-dropdown-wrap">
+                <a href="#" class="cart-topbar-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count"><?php cart_item($cust_id); ?></span>
+                </a>
+                <div class="cart-dropdown-panel">
+                    <div class="cart-dropdown-header"><h6><i class="fas fa-shopping-cart me-1"></i>My Cart</h6></div>
+                    <div class="cart-scroll"><?php show_cart($cust_id); ?></div>
+                    <div class="cart-dropdown-footer">
+                        <strong style="color:#1A1A1A;">₹<?php echo $totalPrice; ?></strong>
+                        <a href="<?php echo $next_page; ?>" onclick="return confirmCheckout()" class="btn btn-pastel btn-sm">Checkout</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <span class="welcome-text"><i class="fas fa-user-circle me-1"></i>Welcome, <strong><?php echo $cust_name; ?></strong></span>
+            <span class="welcome-text"><i class="fas fa-user-circle me-1"></i>Welcome, <strong><?php echo $cust_name; ?></strong></span>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -440,32 +635,46 @@ $next_page     = ($totalPrice <= $walletBalance) ? "checkout.php?customer_id=$cu
 
 <!-- Action Nav -->
 <div class="cust-action-nav">
-    <a href="profile_page.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
-        <i class="fas fa-user"></i> View Profile
-    </a>
-    <a href="view_orders.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
-        <i class="fas fa-receipt"></i> View Orders
-    </a>
-    <a href="top_up.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
-        <i class="fas fa-wallet"></i> Top Up Wallet
-    </a>
-    <a href="rate_order.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
-        <i class="fas fa-star"></i> Rate Order
-    </a>
-    <a href="rate_delivery.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
-        <i class="fas fa-truck"></i> Rate Delivery
-    </a>
+    <?php if ($is_guest): ?>
+        <span style="font-size:0.82rem; color:#888; padding: 4px 10px;">
+            <i class="fas fa-eye me-1"></i> Browsing as Guest
+        </span>
+        <!-- Search for guests -->
+        <form class="search-form" action="index.php" method="get">
+            <input type="search" placeholder="Search products…" name="search_bar">
+            <button type="submit" name="search_data"><i class="fas fa-search"></i></button>
+        </form>
+        <button class="cust-nav-btn" onclick="openLoginModal(0)">
+            <i class="fas fa-sign-in-alt"></i> Login to Shop
+        </button>
+    <?php else: ?>
+        <a href="profile_page.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+            <i class="fas fa-user"></i> View Profile
+        </a>
+        <a href="view_orders.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+            <i class="fas fa-receipt"></i> View Orders
+        </a>
+        <a href="top_up.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+            <i class="fas fa-wallet"></i> Top Up Wallet
+        </a>
+        <a href="rate_order.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+            <i class="fas fa-star"></i> Rate Order
+        </a>
+        <a href="rate_delivery.php?customer_id=<?php echo $cust_id; ?>" class="cust-nav-btn">
+            <i class="fas fa-truck"></i> Rate Delivery
+        </a>
 
-    <!-- Search -->
-    <form class="search-form" action="search_bar.php" method="get">
-        <input type="hidden" name="customer_id" value="<?php echo $cust_id; ?>">
-        <input type="search" placeholder="Search products…" name="search_bar">
-        <button type="submit" name="search_data"><i class="fas fa-search"></i></button>
-    </form>
+        <!-- Search -->
+        <form class="search-form" action="search_bar.php" method="get">
+            <input type="hidden" name="customer_id" value="<?php echo $cust_id; ?>">
+            <input type="search" placeholder="Search products…" name="search_bar">
+            <button type="submit" name="search_data"><i class="fas fa-search"></i></button>
+        </form>
 
-    <a href="../start.php" class="cust-nav-btn logout-btn">
-        <i class="fas fa-sign-out-alt"></i> Logout
-    </a>
+        <a href="../start.php" class="cust-nav-btn logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    <?php endif; ?>
 </div>
 
 <!-- Main shop layout -->
@@ -473,17 +682,28 @@ $next_page     = ($totalPrice <= $walletBalance) ? "checkout.php?customer_id=$cu
     <!-- Category Sidebar -->
     <aside class="cat-sidebar">
         <h6><i class="fas fa-th-list me-1"></i> Categories</h6>
-        <a href="index.php?customer_id=<?php echo $cust_id; ?>" class="cat-all-link">All Products</a>
-        <?php display_categories($cust_id); ?>
+        <?php if ($is_guest): ?>
+            <a href="index.php" class="cat-all-link">All Products</a>
+            <?php display_categories_guest(); ?>
+        <?php else: ?>
+            <a href="index.php?customer_id=<?php echo $cust_id; ?>" class="cat-all-link">All Products</a>
+            <?php display_categories($cust_id); ?>
+        <?php endif; ?>
     </aside>
 
     <!-- Products -->
     <main class="products-area">
         <div class="row g-3">
             <?php
-            display_products($cust_id);
-            display_cat_products($cust_id);
-            search_products($cust_id);
+            if ($is_guest) {
+                display_products_guest();
+                display_cat_products_guest();
+                search_products_guest();
+            } else {
+                display_products($cust_id);
+                display_cat_products($cust_id);
+                search_products($cust_id);
+            }
             ?>
         </div>
     </main>
@@ -492,8 +712,74 @@ $next_page     = ($totalPrice <= $walletBalance) ? "checkout.php?customer_id=$cu
 <!-- Footer -->
 <?php include("../includes/footer.php"); ?>
 
+<!-- ── Login Modal ─────────────────────────────────────────────────────────── -->
+<div class="login-modal-overlay" id="loginModalOverlay">
+    <div class="login-modal-box">
+        <button class="login-modal-close" onclick="closeLoginModal()" aria-label="Close">&times;</button>
+        <div class="login-modal-icon"><i class="fas fa-shopping-bag"></i></div>
+        <h2 class="login-modal-title">Login to Proceed</h2>
+        <p class="login-modal-hint">Sign in to add items to your cart and place orders.</p>
+
+        <?php if (!empty($login_error)): ?>
+            <div class="login-modal-error"><i class="fas fa-exclamation-circle me-1"></i><?php echo $login_error; ?></div>
+        <?php endif; ?>
+
+        <form action="index.php<?php echo isset($_GET['cat']) ? '?cat='.$_GET['cat'] : ''; ?>" method="post">
+            <input type="hidden" name="pending_product" id="pendingProductInput"
+                   value="<?php echo isset($pending_product_reopen) ? $pending_product_reopen : 0; ?>">
+
+            <label class="modal-form-label"><i class="fas fa-envelope me-1"></i> Email Address</label>
+            <input type="email" class="modal-form-input" name="modal_email" placeholder="Enter your email" required autocomplete="off">
+
+            <label class="modal-form-label"><i class="fas fa-lock me-1"></i> Password</label>
+            <input type="password" class="modal-form-input" name="modal_password" placeholder="Enter your password" required autocomplete="off">
+
+            <button type="submit" name="modal_login" class="modal-submit-btn">
+                <i class="fas fa-sign-in-alt me-1"></i> Sign In &amp; Continue
+            </button>
+        </form>
+
+        <p class="modal-register-link">
+            Don't have an account?
+            <a href="customer_registration.php" id="registerLink">Register here</a>
+        </p>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+var pendingProductId = 0;
+
+function openLoginModal(prodId) {
+    pendingProductId = prodId || 0;
+    document.getElementById('pendingProductInput').value = pendingProductId;
+    if (pendingProductId > 0) {
+        document.getElementById('registerLink').href = 'customer_registration.php?pending_product=' + pendingProductId;
+    } else {
+        document.getElementById('registerLink').href = 'customer_registration.php';
+    }
+    document.getElementById('loginModalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLoginModal() {
+    document.getElementById('loginModalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('loginModalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeLoginModal();
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLoginModal();
+});
+
+<?php if (!empty($reopen_modal)): ?>
+openLoginModal(<?php echo $pending_product_reopen; ?>);
+<?php endif; ?>
+
+<?php if (!$is_guest): ?>
 function confirmCheckout() {
     if ("<?php echo $next_page; ?>" === "") {
         alert("Insufficient wallet balance. Please top up in 'Top Up Wallet'.");
@@ -509,6 +795,7 @@ function confirmCheckout() {
     }
     return true;
 }
+<?php endif; ?>
 </script>
 </body>
 </html>

@@ -55,13 +55,15 @@ include ('age_trigger.php');
 </head>
 <body>
     <div style="max-width:560px; margin:0 auto;">
-        <a href="customer_login.php" class="back-link"><i class="fas fa-arrow-left me-1"></i> Back to Login</a>
+        <?php $pending_product = isset($_GET['pending_product']) ? intval($_GET['pending_product']) : 0; ?>
+        <a href="customer_login.php<?php echo $pending_product > 0 ? '?pending_product='.$pending_product : ''; ?>" class="back-link"><i class="fas fa-arrow-left me-1"></i> Back to Login</a>
     </div>
     <div class="reg-card">
         <div class="text-center mb-2" style="font-size:2rem; color:#c97b7b;"><i class="fas fa-user-plus"></i></div>
         <h2 class="reg-title">Create Account</h2>
         <p class="reg-sub">Join ShopEase — it's free!</p>
         <form action="" method="post">
+            <input type="hidden" name="pending_product" value="<?php echo $pending_product; ?>">
             <div class="section-divider">Personal Information</div>
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -133,7 +135,7 @@ include ('age_trigger.php');
             <input type="submit" value="Create Account" class="btn btn-pastel w-100 mt-2" name="customer_register">
             <p class="text-center mt-3 mb-0" style="font-size:0.88rem; color:#b58585;">
                 Already have an account?
-                <a href="customer_login.php" style="color:#c97b7b; font-weight:600;"> Sign in</a>
+                <a href="customer_login.php<?php echo $pending_product > 0 ? '?pending_product='.$pending_product : ''; ?>" style="color:#c97b7b; font-weight:600;"> Sign in</a>
             </p>
         </form>
     </div>
@@ -153,6 +155,7 @@ if (isset($_POST['customer_register'])) {
     $conf_password = $_POST['conf_customer_password'];
     $dob = $_POST['dob'];
     $gender = $_POST['gender'];
+    $pending = isset($_POST['pending_product']) ? intval($_POST['pending_product']) : 0;
 
     $select_total = "SELECT * FROM customer;";
     $result_total = mysqli_query($con, $select_total);
@@ -176,7 +179,8 @@ if (isset($_POST['customer_register'])) {
         $insert_wallet = "INSERT INTO wallet (customerID, balance, upiID, rewardPoints) VALUES ('$new_cust', DEFAULT, '$upi_id', DEFAULT);";
         $sql_wallet = mysqli_query($con, $insert_wallet);
         if ($sql_execute && $sql_wallet) {
-            echo "<script>alert('Registered successfully! Please login.'); window.location.href = 'customer_login.php';</script>";
+            $login_redirect = 'customer_login.php' . ($pending > 0 ? '?pending_product=' . $pending : '');
+            echo "<script>alert('Registered successfully! Please login.'); window.location.href = '$login_redirect';</script>";
         } else {
             die(mysqli_error($con));
         }

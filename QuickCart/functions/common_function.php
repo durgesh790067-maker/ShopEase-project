@@ -24,6 +24,81 @@ function product_card_html($prod_id, $prod_name, $prod_desc, $prod_image, $prod_
     </div>";
 }
 
+// ── Guest-mode helper: product card without customer_id ───────────────────────
+function product_card_html_guest($prod_id, $prod_name, $prod_desc, $prod_image, $prod_price) {
+    $short_desc = mb_strlen($prod_desc) > 72 ? mb_substr($prod_desc, 0, 72) . '…' : $prod_desc;
+    return "
+    <div class='col-6 col-md-4 col-lg-3 mb-4'>
+      <div class='prod-card h-100'>
+        <div class='prod-card__img-wrap'>
+          <img src='../images/$prod_image' alt='$prod_name'>
+        </div>
+        <div class='prod-card__body'>
+          <p class='prod-card__name'>$prod_name</p>
+          <p class='prod-card__desc'>$short_desc</p>
+          <div class='prod-card__footer'>
+            <span class='prod-card__price'>₹$prod_price</span>
+            <button class='prod-card__btn' onclick='openLoginModal($prod_id)'>
+              <i class='fas fa-cart-plus'></i> Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>";
+}
+
+function display_products_guest() {
+    global $con;
+    if (!isset($_GET['cat'])) {
+        $result_prod = mysqli_query($con, "SELECT * FROM product;");
+        if (mysqli_num_rows($result_prod) == 0) {
+            echo "<p class='text-center text-muted py-5'>No products available right now.</p>";
+        }
+        while ($row = mysqli_fetch_assoc($result_prod)) {
+            echo product_card_html_guest($row['productID'], $row['name'], $row['description'], $row['prod_image'], $row['price']);
+        }
+    }
+}
+
+function display_cat_products_guest() {
+    global $con;
+    if (isset($_GET['cat'])) {
+        $cat_id = intval($_GET['cat']);
+        $result_prod = mysqli_query($con, "SELECT * FROM product WHERE categoryID = $cat_id;");
+        if (mysqli_num_rows($result_prod) == 0) {
+            echo "<p class='text-center text-muted py-5'>No products in this category yet.</p>";
+        }
+        while ($row = mysqli_fetch_assoc($result_prod)) {
+            echo product_card_html_guest($row['productID'], $row['name'], $row['description'], $row['prod_image'], $row['price']);
+        }
+    }
+}
+
+function display_categories_guest() {
+    global $con;
+    $cat_result = mysqli_query($con, "SELECT * FROM productCategory;");
+    while ($row = mysqli_fetch_assoc($cat_result)) {
+        $cat_name = $row["name"];
+        $cat_id   = $row["categoryID"];
+        $active   = (isset($_GET['cat']) && $_GET['cat'] == $cat_id) ? 'cat-active' : '';
+        echo "<a href='index.php?cat=$cat_id' class='cat-link $active'>$cat_name</a>";
+    }
+}
+
+function search_products_guest() {
+    global $con;
+    if (isset($_GET['search_data'])) {
+        $searched_word = $_GET['search_bar'];
+        $result_prod = mysqli_query($con, "SELECT * FROM product WHERE name LIKE '%$searched_word%' AND stock>0;");
+        if (mysqli_num_rows($result_prod) == 0) {
+            echo "<p class='text-center text-muted py-5'>No results found for \"$searched_word\".</p>";
+        }
+        while ($row = mysqli_fetch_assoc($result_prod)) {
+            echo product_card_html_guest($row['productID'], $row['name'], $row['description'], $row['prod_image'], $row['price']);
+        }
+    }
+}
+
 // display all products on home-page
 function display_products($cust_id) {
     global $con;
