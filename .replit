@@ -35,5 +35,5 @@ localPort = 5000
 externalPort = 80
 
 [deployment]
-run = ["sh", "-c", "exec php -S 0.0.0.0:$PORT -t QuickCart/"]
-deploymentTarget = "cloudrun"
+run = ["bash", "/home/runner/workspace/deploy.sh"]
+deploymentTarget = "vm"
